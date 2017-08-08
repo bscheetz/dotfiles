@@ -12,3 +12,4 @@ git clone https://github.com/unblevable/quick-scope
 git clone https://github.com/ervandew/supertab
 git clone https://github.com/majutsushi/tagbar
 git clone https://github.com/vim-airline/vim-airline-themes
+git clone https://github.com/nathanaelkane/vim-indent-guides
