@@ -50,6 +50,8 @@ git clone --depth 1 https://github.com/vim-airline/vim-airline-themes
 git clone --recursive --depth 1 https://github.com/davidhalter/jedi-vim
 git clone --depth 1 https://github.com/tpope/vim-sleuth
 git clone --depth 1 https://github.com/w0rp/ale
+git clone --depth 1 https://github.com/airblade/vim-gitgutter
+git clone --depth 1 https://github.com/tpope/vim-fugitive
 
 pip install jedi
 pip install neovim
