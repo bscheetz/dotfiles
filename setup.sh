@@ -9,9 +9,9 @@ elif [ "$(uname)" = "Darwin" ]; then
     brew install neovim
 fi
 
-
 str="alias vi='nvim'"
 
+# add lines to .bashrc if .bashrc doesn't already contain them
 if [ ! -f ~/.bashrc ]; then
     cp .bashrc ~/.bashrc
 elif grep "$str" ~/.bashrc > /dev/null; then
@@ -20,13 +20,19 @@ else
     cat .bashrc >> ~/.bashrc
 fi
 
+# set XDG_CONFIG_HOME if it's not already set
+if [ ! $XDG_CONFIG_HOME ]; then
+    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+fi
 
-cp .vimrc ~/
-mkdir -p ~/.config/nvim/
-cp init.vim ~/.config/nvim/
+cp .vimrc $HOME
+mkdir -p $XDG_CONFIG_HOME/nvim/
+cp init.vim $XDG_CONFIG_HOME/nvim/
 
 cd ~
-mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+cd $HOME/.vim/bundle/
 
 git clone https://github.com/altercation/vim-colors-solarized
 git clone https://github.com/bling/vim-airline
