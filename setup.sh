@@ -29,6 +29,8 @@ cp .vimrc $HOME
 mkdir -p $XDG_CONFIG_HOME/nvim/
 cp init.vim $XDG_CONFIG_HOME/nvim/
 
+cp .tmux.conf $HOME
+
 cd ~
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
