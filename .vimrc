@@ -25,9 +25,12 @@ colorscheme solarized
 
 let g:airline_theme='deus'
 
+set rtp+=~/.fzf
+
 nmap <F8> :TagbarToggle<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{figitive#statusline()}
 set statusline+=%*
 

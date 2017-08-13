@@ -34,17 +34,20 @@ cp .tmux.conf $HOME
 cd ~
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
+git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf
+~/.fzf/install
+
 cd $HOME/.vim/bundle/
 
-git clone https://github.com/altercation/vim-colors-solarized
-git clone https://github.com/bling/vim-airline
-git clone https://github.com/unblevable/quick-scope
-git clone https://github.com/ervandew/supertab
-git clone https://github.com/majutsushi/tagbar
-git clone https://github.com/vim-airline/vim-airline-themes
-git clone --recursive https://github.com/davidhalter/jedi-vim
-git clone https://github.com/tpope/vim-sleuth
-git clone https://github.com/w0rp/ale
+git clone --depth 1 https://github.com/altercation/vim-colors-solarized
+git clone --depth 1 https://github.com/bling/vim-airline
+git clone --depth 1 https://github.com/unblevable/quick-scope
+git clone --depth 1 https://github.com/ervandew/supertab
+git clone --depth 1 https://github.com/majutsushi/tagbar
+git clone --depth 1 https://github.com/vim-airline/vim-airline-themes
+git clone --recursive --depth 1 https://github.com/davidhalter/jedi-vim
+git clone --depth 1 https://github.com/tpope/vim-sleuth
+git clone --depth 1 https://github.com/w0rp/ale
 
 pip install jedi
 pip install neovim
