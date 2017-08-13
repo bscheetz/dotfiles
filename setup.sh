@@ -38,6 +38,8 @@ git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf
 ~/.fzf/install
 
 cd $HOME/.vim/bundle/
+# remove old bundles
+rm -rf $HOME/.vim/bundle/*
 
 git clone --depth 1 https://github.com/altercation/vim-colors-solarized
 git clone --depth 1 https://github.com/bling/vim-airline
@@ -52,3 +54,4 @@ git clone --depth 1 https://github.com/w0rp/ale
 pip install jedi
 pip install neovim
 pip install pylint
+
