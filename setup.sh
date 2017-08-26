@@ -4,20 +4,25 @@ if [ "$(uname)" = "Linux" ]; then
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
     sudo apt-get install neovim
+
+    bashfile=".bashrc"
+
 elif [ "$(uname)" = "Darwin" ]; then
     brew install ctags
     brew install neovim
+
+    bashfile=".bash_profile"
 fi
 
 str="alias vi='nvim'"
 
 # add lines to .bashrc if .bashrc doesn't already contain them
-if [ ! -f ~/.bashrc ]; then
-    cp .bashrc ~/.bashrc
-elif grep "$str" ~/.bashrc > /dev/null; then
+if [ ! -f ~/$bashfile ]; then
+    cp .bashrc ~/$bashfile
+elif grep "$str" ~/$bashfile > /dev/null; then
     echo "FOUND"
 else
-    cat .bashrc >> ~/.bashrc
+    cat .bashrc >> ~/$bashfile
 fi
 
 # set XDG_CONFIG_HOME if it's not already set
@@ -46,8 +51,10 @@ git clone --depth 1 https://github.com/bling/vim-airline
 git clone --depth 1 https://github.com/unblevable/quick-scope
 git clone --depth 1 https://github.com/ervandew/supertab
 git clone --depth 1 https://github.com/majutsushi/tagbar
-git clone --depth 1 https://github.com/vim-airline/vim-airline-themes
 git clone --recursive --depth 1 https://github.com/davidhalter/jedi-vim
+git clone --depth 1 https://github.com/vim-airline/vim-airline-themes
+git clone --depth 1 https://github.com/shougo/deoplete.nvim
+git clone --depth 1 https://github.com/zchee/deoplete-jedi
 git clone --depth 1 https://github.com/tpope/vim-sleuth
 git clone --depth 1 https://github.com/w0rp/ale
 git clone --depth 1 https://github.com/airblade/vim-gitgutter
@@ -56,4 +63,3 @@ git clone --depth 1 https://github.com/tpope/vim-fugitive
 pip install jedi
 pip install neovim
 pip install pylint
-
