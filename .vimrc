@@ -31,7 +31,7 @@ nmap <F8> :TagbarToggle<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%{figitive#statusline()}
+set statusline+=%{fugitive#statusline()}
 set statusline+=%*
 
 let g:deoplete#enable_at_startup = 1
