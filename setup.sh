@@ -59,6 +59,10 @@ git clone --depth 1 https://github.com/tpope/vim-sleuth
 git clone --depth 1 https://github.com/w0rp/ale
 git clone --depth 1 https://github.com/airblade/vim-gitgutter
 git clone --depth 1 https://github.com/tpope/vim-fugitive
+git clone --depth 1 https://github.com/scrooloose/nerdtree
+git clone --depth 1 https://github.com/easymotion/vim-easymotion
+git clone --depth 1 https://github.com/ludovicchabant/vim-gutentags
+git clone --depth 1 https://github.com/nielsmadan/harlequin
 
 pip install jedi
 pip install neovim
