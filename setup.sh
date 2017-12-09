@@ -1,4 +1,8 @@
 #!/bin/bash
+
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
 if [ "$(uname)" = "Linux" ]; then
     apt-get install ctags
     sudo add-apt-repository ppa:neovim-ppa/stable
@@ -6,6 +10,8 @@ if [ "$(uname)" = "Linux" ]; then
     sudo apt-get install neovim
 
     bashfile=".bashrc"
+    fonts_folder="/usr/share/fonts/"
+    fonts_conf="/etc/fonts/conf.d/"
 
 elif [ "$(uname)" = "Darwin" ]; then
     brew install ctags
@@ -13,6 +19,12 @@ elif [ "$(uname)" = "Darwin" ]; then
 
     bashfile=".bash_profile"
 fi
+
+
+cp ./PowerlineSymbols.otf $fonts_folder
+fc-cache -vf $fonts_folder
+
+mv 10-powerline-symbols.conf $fonts_conf
 
 str="alias vi='nvim'"
 
