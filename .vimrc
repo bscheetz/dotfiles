@@ -1,3 +1,4 @@
+let g:python3_host_prog = $PYTHON3PATH
 execute pathogen#infect()
 
 set nocompatible
@@ -25,6 +26,8 @@ set background=dark
 let g:solarized_termcolors=256
 colorscheme harlequin
 
+let g:gutentags_ctags_tagfile=".tags"
+
 let g:airline_theme='dark'
 let g:airline_powerline_fonts=1
 let g:Powerline_symbols='fancy'
@@ -32,7 +35,6 @@ let g:Powerline_symbols='fancy'
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tagbar#enabled=1
 let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#syntastic#enabled=1
 
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.pyc$', '__pycache__']
@@ -47,11 +49,10 @@ set rtp+=~/.fzf
 " add mappings for a few plugins
 nmap <F8> :TagbarToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
-
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%{fugitive#statusline()}
 set statusline+=%*
+
 
 " deoplete stuff
 let g:deoplete#enable_at_startup = 1

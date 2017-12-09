@@ -1,18 +1,24 @@
 #!/bin/bash
 if [ "$(uname)" = "Linux" ]; then
+    apt-get install zsh
     apt-get install ctags
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
     sudo apt-get install neovim
 
-    bashfile=".bashrc"
+    #bashfile=".bashrc"
 
 elif [ "$(uname)" = "Darwin" ]; then
+    brew install zsh
     brew install ctags
     brew install neovim
 
-    bashfile=".bash_profile"
+    #bashfile=".bash_profile"
 fi
+
+bashfile=".zshrc"
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 str="alias vi='nvim'"
 
@@ -46,13 +52,12 @@ cd $HOME/.vim/bundle/
 # remove old bundles
 rm -rf $HOME/.vim/bundle/*
 
-git clone --depth 1 https://github.com/altercation/vim-colors-solarized
+#git clone --depth 1 https://github.com/altercation/vim-colors-solarized
 git clone --depth 1 https://github.com/bling/vim-airline
-git clone --depth 1 https://github.com/unblevable/quick-scope
+git clone --depth 1 https://github.com/unblevable/quick-scope		# highlight useful character jumps
 git clone --depth 1 https://github.com/ervandew/supertab
-git clone --depth 1 https://github.com/majutsushi/tagbar
-git clone --recursive --depth 1 https://github.com/davidhalter/jedi-vim
-git clone --depth 1 https://github.com/vim-airline/vim-airline-themes
+git clone --depth 1 https://github.com/majutsushi/tagbar		# show tags in sidebar
+git clone --depth 1 https://github.com/vim-airline/vim-airline-themes	# themes for airline
 git clone --depth 1 https://github.com/shougo/deoplete.nvim
 git clone --depth 1 https://github.com/zchee/deoplete-jedi
 git clone --depth 1 https://github.com/tpope/vim-sleuth
@@ -62,7 +67,9 @@ git clone --depth 1 https://github.com/tpope/vim-fugitive
 git clone --depth 1 https://github.com/scrooloose/nerdtree
 git clone --depth 1 https://github.com/easymotion/vim-easymotion
 git clone --depth 1 https://github.com/ludovicchabant/vim-gutentags
-git clone --depth 1 https://github.com/nielsmadan/harlequin
+git clone --depth 1 https://github.com/nielsmadan/harlequin		# sublime text coloring
+git clone --depth 1 https://github.com/ap/vim-buftabline
+
 
 pip install jedi
 pip install neovim
