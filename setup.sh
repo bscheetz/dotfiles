@@ -70,6 +70,12 @@ git clone --depth 1 https://github.com/ludovicchabant/vim-gutentags
 git clone --depth 1 https://github.com/nielsmadan/harlequin		# sublime text coloring
 git clone --depth 1 https://github.com/ap/vim-buftabline
 
+git clone --depth 1 https://github.com/powerline/fonts
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+
 
 pip install jedi
 pip install neovim
