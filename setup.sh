@@ -36,7 +36,7 @@ if [[ ! -f ~/.antigen.zsh ]]; then
     if [ "$(uname)" = "Darwin" ]; then
         cat "source /usr/local/share/antigen/antigen.zsh" > ~/.antigen.zsh
     elif [ "$(uname)" = "Linux" ]; then
-        curl https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen.zsh
+        cat "source /usr/share/zsh-antigen/antigen.zsh" > ~/.antigen.zsh
     fi
 fi
 
@@ -64,6 +64,7 @@ cd fonts
 cd ..
 rm -rf fonts
 
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 pip install jedi
 pip install neovim
