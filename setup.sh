@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ "$(uname)" = "Linux" ]; then
-    apt-get install zsh
-    apt-get install ctags
+    sudo apt-get install zsh
+    sudo apt-get install ctags
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
     sudo apt-get install neovim
