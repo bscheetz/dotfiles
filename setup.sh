@@ -5,20 +5,20 @@ if [ "$(uname)" = "Linux" ]; then
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
     sudo apt-get install neovim
+    sudo apt-get install antigen
 
     #bashfile=".bashrc"
 
 elif [ "$(uname)" = "Darwin" ]; then
     brew install zsh
-    brew install ctags
+    brew install ctags 
     brew install neovim
+    brew install antigen
 
     #bashfile=".bash_profile"
 fi
 
 bashfile=".zshrc"
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 str="alias vi='nvim'"
 
@@ -29,6 +29,15 @@ elif grep "$str" ~/$bashfile > /dev/null; then
     echo "FOUND"
 else
     cat .bashrc >> ~/$bashfile
+fi
+
+# zsh package manager
+if [[ ! -f ~/.antigen.zsh ]]; then
+    if [ "$(uname)" = "Darwin" ]; then
+        cat "source /usr/local/share/antigen/antigen.zsh" > ~/.antigen.zsh
+    elif [ "$(uname)" = "Linux" ]; then
+        curl https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen.zsh
+    fi
 fi
 
 # set XDG_CONFIG_HOME if it's not already set
@@ -43,32 +52,11 @@ cp init.vim $XDG_CONFIG_HOME/nvim/
 cp .tmux.conf $HOME
 
 cd ~
-mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf
 ~/.fzf/install
-
-cd $HOME/.vim/bundle/
-# remove old bundles
-rm -rf $HOME/.vim/bundle/*
-
-#git clone --depth 1 https://github.com/altercation/vim-colors-solarized
-git clone --depth 1 https://github.com/bling/vim-airline
-git clone --depth 1 https://github.com/unblevable/quick-scope		# highlight useful character jumps
-git clone --depth 1 https://github.com/ervandew/supertab
-git clone --depth 1 https://github.com/majutsushi/tagbar		# show tags in sidebar
-git clone --depth 1 https://github.com/vim-airline/vim-airline-themes	# themes for airline
-git clone --depth 1 https://github.com/shougo/deoplete.nvim
-git clone --depth 1 https://github.com/zchee/deoplete-jedi
-git clone --depth 1 https://github.com/tpope/vim-sleuth
-git clone --depth 1 https://github.com/w0rp/ale
-git clone --depth 1 https://github.com/airblade/vim-gitgutter
-git clone --depth 1 https://github.com/tpope/vim-fugitive
-git clone --depth 1 https://github.com/scrooloose/nerdtree
-git clone --depth 1 https://github.com/easymotion/vim-easymotion
-git clone --depth 1 https://github.com/ludovicchabant/vim-gutentags
-git clone --depth 1 https://github.com/nielsmadan/harlequin		# sublime text coloring
-git clone --depth 1 https://github.com/ap/vim-buftabline
 
 git clone --depth 1 https://github.com/powerline/fonts
 cd fonts
