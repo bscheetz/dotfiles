@@ -5,7 +5,7 @@ if [ "$(uname)" = "Linux" ]; then
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
     sudo apt-get install neovim
-    sudo apt-get install antigen
+    sudo apt-get install zsh-antigen
 
     #bashfile=".bashrc"
 
