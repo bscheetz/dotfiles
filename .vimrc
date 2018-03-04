@@ -83,6 +83,9 @@ set laststatus=2
 "syntax enable
 colorscheme harlequin
 
+" Reverse SuperTabe completion direction
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " deoplete stuff
 let g:deoplete#enable_at_startup = 1
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" :
