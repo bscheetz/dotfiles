@@ -68,7 +68,7 @@ Plug 'ap/vim-buftabline'
 Plug 'ctrlpvim/ctrlp.vim', {'on': 'CtrlP'} " Great fuzzy finder
 Plug 'mhinz/vim-grepper' " find text anywhere in project
 Plug 'Shougo/vimfiler.vim' " directory lister
-Plug 'jusinmk/vim-sneak' " efficient code targeting
+Plug 'justinmk/vim-sneak' " efficient code targeting
 call plug#end()
 
 
@@ -83,7 +83,7 @@ set laststatus=2
 "syntax enable
 colorscheme harlequin
 
-" Reverse SuperTabe completion direction
+" Reverse SuperTab completion direction
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " deoplete stuff
