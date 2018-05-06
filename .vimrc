@@ -69,6 +69,7 @@ Plug 'ctrlpvim/ctrlp.vim', {'on': 'CtrlP'} " Great fuzzy finder
 Plug 'mhinz/vim-grepper' " find text anywhere in project
 Plug 'Shougo/vimfiler.vim' " directory lister
 Plug 'justinmk/vim-sneak' " efficient code targeting
+Plug 'rakr/vim-one' " vim-one theme
 call plug#end()
 
 
@@ -81,7 +82,9 @@ let g:airline#extensions#tabline#enabled=1
 set laststatus=2
 
 "syntax enable
-colorscheme harlequin
+" colorscheme harlequin
+colorscheme one
+set background=dark
 
 " Reverse SuperTab completion direction
 let g:SuperTabDefaultCompletionType = "<c-n>"

@@ -14,6 +14,7 @@ source ~/.antigen.zsh
 antigen bundle zsh-users/zsh-syntax-highlighting # syntax highlighting for shell
 antigen bundle git # git shorthand
 antigen bundle zsh-users/zsh-autosuggestions # code complete for shell
+antigen theme pure
 antigen apply
 
 # correct typos. ignore `git status` because there is some glitch
