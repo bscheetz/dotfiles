@@ -1,11 +1,13 @@
 #!/bin/bash
 if [ "$(uname)" = "Linux" ]; then
+    sudo apt-get install curl
     sudo apt-get install zsh
     sudo apt-get install ctags
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
     sudo apt-get install neovim
     sudo apt-get install zsh-antigen
+    sudo apt-get install cmake libfreetype6-dev libfontconfig1-dev xclip
 
     #bashfile=".bashrc"
 
@@ -16,6 +18,15 @@ elif [ "$(uname)" = "Darwin" ]; then
     brew install antigen
 
     #bashfile=".bash_profile"
+fi
+
+if ! [ -x "$(command -v rustup)" ]; then
+    curl https://sh.rustup.rs -sSf | sh
+fi
+
+if ! [ -x "$(command -v alacritty)" ]; then
+    # install alacritty
+    cargo install --git https://github.com/jwilm/alacritty
 fi
 
 bashfile=".zshrc"
