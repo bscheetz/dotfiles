@@ -8,6 +8,7 @@ if [ "$(uname)" = "Linux" ]; then
     sudo apt-get install neovim
     sudo apt-get install zsh-antigen
     sudo apt-get install cmake libfreetype6-dev libfontconfig1-dev xclip
+    sudo apt-get install python3-pip
 
     #bashfile=".bashrc"
 
@@ -45,9 +46,9 @@ fi
 # zsh package manager
 if [[ ! -f ~/.antigen.zsh ]]; then
     if [ "$(uname)" = "Darwin" ]; then
-        cat "source /usr/local/share/antigen/antigen.zsh" > ~/.antigen.zsh
+        cat /usr/local/share/antigen/antigen.zsh > ~/.antigen.zsh
     elif [ "$(uname)" = "Linux" ]; then
-        cat "source /usr/share/zsh-antigen/antigen.zsh" > ~/.antigen.zsh
+        cat /usr/share/zsh-antigen/antigen.zsh > ~/.antigen.zsh
     fi
 fi
 
@@ -67,8 +68,10 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf
-~/.fzf/install
+# install fzf and answer yes to all its prompts
+yes | ~/.fzf/install
 
+# set up powerline and its fonts
 git clone --depth 1 https://github.com/powerline/fonts
 cd fonts
 ./install.sh
@@ -77,6 +80,9 @@ rm -rf fonts
 
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
-pip install jedi
-pip install neovim
-pip install pylint
+pip3 install jedi
+pip3 install neovim
+pip3 install pylint
+
+nvim --headless +PlugInstall +qa
+nvim --headless +UpdateRemotePlugins +qa
