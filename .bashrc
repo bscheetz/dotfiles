@@ -23,11 +23,7 @@ alias git status='nocorrect git status'
 
 # FOR ANY SHELL
 export PATH="$PATH:$HOME/.local/bin:$HOME/miniconda/bin"
-if [ "$(uname)" = "Linux" ]; then
-      export PYTHON3PATH="$HOME/miniconda3/bin/python3"
-elif [ "$(uname)" = "Darwin" ]; then
-      export PYTHON3PATH="$HOME/miniconda/bin/python3"
-fi
+export PYTHON3PATH="$(which python3)"
 
 if type nvim > /dev/null 2>&1; then
       alias vi='nvim'
