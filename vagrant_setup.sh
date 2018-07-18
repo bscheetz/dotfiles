@@ -25,15 +25,14 @@ install_packages () {
 		#bashfile=".bash_profile"
 	fi
 
-	# install alacritty
-	if ! [ -x "$(command -v rustup)" ]; then
-	    curl https://sh.rustup.rs -sSf | sh
-	fi
-
-	if ! [ -x "$(command -v alacritty)" ]; then
-	    # install alacritty
-	    cargo install --git https://github.com/jwilm/alacritty
-	fi
+	#if ! [ -x "$(command -v rustup)" ]; then
+	#    curl https://sh.rustup.rs -sSf | sh
+	#fi
+	#
+	#if ! [ -x "$(command -v alacritty)" ]; then
+	#    # install alacritty
+	#    cargo install --git https://github.com/jwilm/alacritty
+	#fi
 }
 
 construct_shell_config () {
