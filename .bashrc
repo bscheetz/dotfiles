@@ -20,6 +20,7 @@ antigen apply
 # correct typos. ignore `git status` because there is some glitch
 setopt correctall
 alias git status='nocorrect git status'
+alias rg='nocorrect rg'
 
 # FOR ANY SHELL
 export PATH="$PATH:$HOME/.local/bin:$HOME/miniconda/bin"
