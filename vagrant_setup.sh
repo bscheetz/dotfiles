@@ -20,8 +20,13 @@ install_packages () {
 						   python3-pip \
 						   direnv
 
+		# install ripgrep
+		curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb
+		sudo dpkg -i ripgrep_0.10.0_amd64.deb
+		rm ripgrep_0.10.0_amd64.deb
+
 	elif [ "$(uname)" = "Darwin" ]; then
-		brew install zsh ctags neovim antigen direnv
+		brew install zsh ctags neovim antigen direnv ripgrep
 
 		#bashfile=".bash_profile"
 	fi
