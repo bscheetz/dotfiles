@@ -55,20 +55,19 @@ Plug 'vim-airline/vim-airline-themes'	" themes for airline
 Plug 'unblevable/quick-scope'		" highlight useful character jumps
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'	" show tags in sidebar
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'tpope/vim-sleuth'
 Plug 'w0rp/ale'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter' " git status in the gutter
+Plug 'tpope/vim-fugitive' " amazing git integration
 Plug 'easymotion/vim-easymotion'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'junegunn/fzf.vim' " super fast fuzzy finding
+Plug 'ludovicchabant/vim-gutentags' " auto update tags
 Plug 'nielsmadan/harlequin'		" sublime text coloring
 Plug 'ap/vim-buftabline'
-Plug 'ctrlpvim/ctrlp.vim', {'on': 'CtrlP'} " Great fuzzy finder
 Plug 'mhinz/vim-grepper' " find text anywhere in project
 Plug 'Shougo/vimfiler.vim' " directory lister
-Plug 'justinmk/vim-sneak' " efficient code targeting
 Plug 'rakr/vim-one' " vim-one theme
 call plug#end()
 
@@ -118,17 +117,15 @@ set statusline+=%#warningmsg#
 set statusline+=%{fugitive#statusline()}
 set statusline+=%*
 
-" Open CtrlP
-nnoremap <Leader>p :CtrlP<CR>
-nnoremap <Leader>t :CtrlP<CR>
+" FZF Bindings
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>t :Tags<CR>
 
 " search in entire project
-nnoremap <Leader>fp :Grepper<Space>-query<Space> 
-" search in open buffers
-nnoremap <Leader>fb :Grepper<Space>-buffers<Space>-query<Space>-<Space>
+nmap <Leader>fp :Rg<Space>
 
 let g:vimfiler_as_default_explorer=1
 
-" Sneak shortcuts
-let g:sneak#s_next=1
-omap F <Plug>Sneak_F
+let b:ale_linters = {'python': ['pylint']}
+let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
