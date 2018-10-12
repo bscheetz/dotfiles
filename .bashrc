@@ -14,12 +14,13 @@ source ~/.antigen.zsh
 antigen bundle zsh-users/zsh-syntax-highlighting # syntax highlighting for shell
 antigen bundle git # git shorthand
 antigen bundle zsh-users/zsh-autosuggestions # code complete for shell
-antigen theme pure
+antigen theme refined
 antigen apply
 
 # correct typos. ignore `git status` because there is some glitch
 setopt correctall
 alias git status='nocorrect git status'
+alias rg='nocorrect rg'
 
 # FOR ANY SHELL
 export PATH="$PATH:$HOME/.local/bin:$HOME/miniconda/bin"
@@ -30,7 +31,10 @@ if type nvim > /dev/null 2>&1; then
 fi
 
 export XDG_CONFIG_HOME=$HOME/.config
-
+alias tmux='tmux -u'
 
 # autostart tmux if it exists
 if [ "$TMUX" = "" ]; then tmux; fi
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Enable direnv
+eval "$(direnv hook zsh)"
