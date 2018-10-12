@@ -118,6 +118,7 @@ set_xdg_config_var
 setup_neovim
 setup_fonts_for_powerline
 setup_fzf
+setup_tmux
 
 # Change user's default shell to zsh
 chsh -s $(which zsh)
