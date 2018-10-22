@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bashfile=".zshrc"
+shell_config=".zshrc"
 str="alias vi='nvim'"
 
 install_packages () {
@@ -28,7 +28,7 @@ install_packages () {
 	elif [ "$(uname)" = "Darwin" ]; then
 		brew install zsh ctags neovim antigen direnv ripgrep
 
-		#bashfile=".bash_profile"
+		#shell_config=".zprofile"
 	fi
 
 	# install alacritty
@@ -44,12 +44,12 @@ install_packages () {
 
 construct_shell_config () {
 	# add lines to shell RC file if it doesn't already contain them
-	if [ ! -f ~/$bashfile ]; then
-		cp .bashrc ~/$bashfile
-	elif grep "$str" ~/$bashfile > /dev/null; then
+	if [ ! -f ~/$shell_config ]; then
+		cp .zshrc ~/$shell_config
+	elif grep "$str" ~/$shell_config > /dev/null; then
 		echo "FOUND"
 	else
-		cat .bashrc >> ~/$bashfile
+		cat .zshrc >> ~/$shell_config
 	fi
 }
 
