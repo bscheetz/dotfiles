@@ -39,7 +39,8 @@ execute_tmux () {
                   then
                   tmux a -t $(tmux ls | sort -n | head -1 | cut -d ":" -f1)
             else
-                  tmux -2
+                  # start tmux forcing 256 color and enable unicode characters
+                  tmux -2u
             fi
       fi
 }
@@ -48,8 +49,17 @@ set_xdg_config_path () {
       export XDG_CONFIG_HOME=$HOME/.config
 }
 
+set_up_direnv () {
+      # Enable direnv
+      eval "$(direnv hook zsh)"
+}
+
 set_up_fzf () {
       [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+
+set_up_pyenv () {
+      eval "$(pyenv init -)"
 }
 
 # entering a directory automatically changes to that directory
@@ -69,9 +79,8 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/miniconda/bin"
 alias_nvim
 set_python3_path
 set_xdg_config_path
+set_up_direnv
+set_up_pyenv
 set_up_fzf
-
-# Enable direnv
-eval "$(direnv hook zsh)"
 
 execute_tmux
