@@ -67,7 +67,7 @@ Plug 'ludovicchabant/vim-gutentags' " auto update tags
 Plug 'nielsmadan/harlequin'		" sublime text coloring
 Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-grepper' " find text anywhere in project
-Plug 'Shougo/vimfiler.vim' " directory lister
+Plug 'Shougo/defx.nvim' " directory lister
 Plug 'rakr/vim-one' " vim-one theme
 call plug#end()
 
@@ -124,8 +124,6 @@ nmap <Leader>t :Tags<CR>
 
 " search in entire project
 nmap <Leader>fp :Rg<Space>
-
-let g:vimfiler_as_default_explorer=1
 
 let b:ale_linters = {'python': ['pylint']}
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
