@@ -75,7 +75,8 @@ alias make test='nocorrect make test'
 alias tmux='tmux -2u'
 
 # FOR ANY SHELL
-export PATH="$PATH:$HOME/.local/bin:$HOME/miniconda/bin"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH:$HOME/.local/bin"
 
 alias_nvim
 set_python3_path
