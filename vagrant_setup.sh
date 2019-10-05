@@ -71,8 +71,8 @@ set_xdg_config_var () {
 }
 
 setup_tmux () {
-	cp .tmux.conf $HOME
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+	cp .tmux.conf $HOME
 }
 
 setup_neovim () {
@@ -109,11 +109,17 @@ setup_fzf () {
 	yes | ~/.fzf/install
 }
 
+install_pyenv () {
+	git clone https://github.com/pyenv/pyenv ~/.pyenv
+}
+
 
 install_packages
 construct_shell_config
 setup_antigen
 set_xdg_config_var
+install_pyenv
+setup_tmux
 setup_neovim
 setup_fonts_for_powerline
 setup_fzf
