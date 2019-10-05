@@ -113,6 +113,10 @@ install_pyenv () {
 	git clone https://github.com/pyenv/pyenv ~/.pyenv
 }
 
+install_poetry () {
+	curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+}
+
 
 install_packages
 construct_shell_config
@@ -123,6 +127,7 @@ setup_tmux
 setup_neovim
 setup_fonts_for_powerline
 setup_fzf
+install_poetry
 
 # Change user's default shell to zsh
 chsh -s $(which zsh)
