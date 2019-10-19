@@ -104,6 +104,8 @@ setup_neovim () {
 	pip3 install jedi
 	pip3 install neovim
 	pip3 install pylint
+	pip3 install --user pipx
+	python3 -m pipx ensurepath
 
 	nvim --headless +PlugInstall +qa
 	nvim --headless +UpdateRemotePlugins +qa
