@@ -18,12 +18,8 @@ install_packages () {
 						   libfontconfig1-dev \
 						   xclip \
 						   python3-pip \
-						   direnv
-
-		# install ripgrep
-		curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb
-		sudo dpkg -i ripgrep_0.10.0_amd64.deb
-		rm ripgrep_0.10.0_amd64.deb
+						   direnv \
+						   ripgrep
 
 	elif [ "$(uname)" = "Darwin" ]; then
 		brew install zsh ctags neovim antigen direnv ripgrep
