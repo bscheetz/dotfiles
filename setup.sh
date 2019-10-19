@@ -3,29 +3,8 @@
 shell_config=".zshrc"
 str="alias vi='nvim'"
 
-install_packages () {
-	if [ "$(uname)" = "Linux" ]; then
-		yes '' | sudo add-apt-repository ppa:neovim-ppa/stable
-		sudo apt-get update
-		yes | sudo apt-get install \
-						   curl \
-						   zsh \
-						   ctags \
-						   neovim \
-						   zsh-antigen \
-						   cmake \
-						   libfreetype6-dev \
-						   libfontconfig1-dev \
-						   xclip \
-						   python3-pip \
-						   direnv \
-						   ripgrep
 
-	elif [ "$(uname)" = "Darwin" ]; then
-		brew install zsh ctags neovim antigen direnv ripgrep
-
-	fi
-
+install_alacritty () {
 	# install alacritty
 	if ! [ -x "$(command -v rustup)" ]; then
 	    curl https://sh.rustup.rs -sSf | sh
@@ -35,6 +14,46 @@ install_packages () {
 	    # install alacritty
 	    cargo install --git https://github.com/jwilm/alacritty
 	fi
+}
+
+install_pyenv () {
+	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+}
+
+install_packages () {
+	if [ "$(uname)" = "Linux" ]; then
+		yes '' | sudo add-apt-repository ppa:neovim-ppa/stable
+		sudo apt-get update
+		yes | sudo apt-get install \
+				apt-transport-https \
+				ca-certificates \
+				curl \
+				software-properties-common \
+				openssl \
+				readline \
+				sqlite3 \
+				xz \
+				zlib \
+				curl \
+				zsh \
+				ctags \
+				neovim \
+				zsh-antigen \
+				cmake \
+				libfreetype6-dev \
+				libfontconfig1-dev \
+				xclip \
+				python3-pip \
+				direnv \
+				ripgrep
+
+	elif [ "$(uname)" = "Darwin" ]; then
+		brew install zsh ctags neovim antigen direnv ripgrep openssl readline sqlite3 xz zlib
+
+	fi
+
+	install_alacritty
+
 }
 
 construct_shell_config () {
