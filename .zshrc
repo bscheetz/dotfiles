@@ -60,6 +60,16 @@ set_up_fzf () {
 
 set_up_pyenv () {
       eval "$(pyenv init -)"
+      export PYENV_ROOT="$HOME/.pyenv"
+      export PATH="$PYENV_ROOT/bin:$PATH"
+}
+
+add_poetry_to_path () {
+      export PATH="$HOME/.poetry/bin:$PATH"
+}
+
+add_local_bin_to_path () {
+      export PATH="$PATH:$HOME/.local/bin"
 }
 
 # entering a directory automatically changes to that directory
@@ -69,19 +79,16 @@ set_up_antigen
 
 # correct typos. ignore `git status` because there is some glitch
 setopt correctall
-alias git status='nocorrect git status'
+alias make='nocorrect make'
+alias git='nocorrect git'
 alias rg='nocorrect rg'
-alias make test='nocorrect make test'
-alias tmux='tmux -2u'
-
-# FOR ANY SHELL
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$HOME/.poetry/bin:$PATH:$HOME/.local/bin"
 
 alias_nvim
 set_python3_path
 set_xdg_config_path
 set_up_direnv
+add_poetry_to_path
+add_local_bin_to_path
 set_up_pyenv
 set_up_fzf
 
