@@ -24,7 +24,6 @@ install_packages () {
 	elif [ "$(uname)" = "Darwin" ]; then
 		brew install zsh ctags neovim antigen direnv ripgrep
 
-		#shell_config=".zprofile"
 	fi
 
 	# install alacritty
