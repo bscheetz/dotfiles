@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/dotfiles
+    docker:
+      - image: circleci/python:latest
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker
+          command: |
+            docker build --tag dotfiles .
+
+      - run:
+          name: Run setup.sh
+          command: |
+            docker run dotfiles bash -c './setup.sh'
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
