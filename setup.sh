@@ -69,15 +69,9 @@ construct_shell_config () {
 	fi
 }
 
-setup_antigen () {
+install_antigen () {
 	# zsh package manager
-	if [[ ! -f ~/.antigen.zsh ]]; then
-		if [ "$(uname)" = "Darwin" ]; then
-			cat /usr/local/share/antigen/antigen.zsh > ~/.antigen.zsh
-		elif [ "$(uname)" = "Linux" ]; then
-			cat /usr/share/zsh-antigen/antigen.zsh > ~/.antigen.zsh
-		fi
-	fi
+	curl -L git.io/antigen > ~/.antigen.zsh
 }
 
 set_xdg_config_var () {
@@ -132,7 +126,7 @@ setup_fzf () {
 
 install_packages
 construct_shell_config
-setup_antigen
+install_antigen
 set_xdg_config_var
 install_pyenv
 setup_neovim
