@@ -42,6 +42,10 @@ install_packages () {
 				libreadline-dev \
 				sqlite3 \
 				curl \
+				libffi-dev \
+				libbz2-dev \
+				libssl-dev \
+				libsqlite3-dev \
 				zsh \
 				ctags \
 				neovim \
@@ -52,10 +56,23 @@ install_packages () {
 				xclip \
 				python3-pip \
 				direnv \
-				ripgrep
+				ripgrep \
+				tmux
 
 	elif [ "$(uname)" = "Darwin" ]; then
-		brew install zsh ctags neovim antigen direnv ripgrep openssl readline sqlite3 xz zlib
+		brew install \
+			zsh \
+			ctags \
+			neovim \
+			antigen \
+			direnv \
+			ripgrep \
+			openssl \
+			readline \
+			sqlite3 \
+			xz \
+			zlib \
+			tmux
 
 	fi
 
