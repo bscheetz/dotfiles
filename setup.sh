@@ -7,7 +7,8 @@ str="alias vi='nvim'"
 install_alacritty () {
 	# install alacritty
 	if ! [ -x "$(command -v rustup)" ]; then
-	    curl https://sh.rustup.rs -sSf | sh
+		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+		export PATH="$PATH:$HOME/.cargo/bin"
 	fi
 
 	if ! [ -x "$(command -v alacritty)" ]; then
@@ -18,22 +19,23 @@ install_alacritty () {
 
 install_pyenv () {
 	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+	eval "$(pyenv init -)"
+	export PYENV_ROOT="$HOME/.pyenv"
+	export PATH="$PYENV_ROOT/bin:$PATH"
 }
 
 install_packages () {
 	if [ "$(uname)" = "Linux" ]; then
+		yes '' | sudo apt-get install software-properties-common
 		yes '' | sudo add-apt-repository ppa:neovim-ppa/stable
 		sudo apt-get update
 		yes | sudo apt-get install \
 				apt-transport-https \
 				ca-certificates \
 				curl \
-				software-properties-common \
 				openssl \
-				readline \
+				libreadline-dev \
 				sqlite3 \
-				xz \
-				zlib \
 				curl \
 				zsh \
 				ctags \
@@ -101,11 +103,12 @@ setup_neovim () {
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	cd $pri_dir
 
-	pip3 install jedi
-	pip3 install neovim
-	pip3 install pylint
-	pip3 install --user pipx
-	python3 -m pipx ensurepath
+	pyenv virtualenv 3.7.3 neovim3
+	pyenv activate neovim3
+
+	pip install jedi
+	pip install neovim
+	pip install pylint
 
 	nvim --headless +PlugInstall +qa
 	nvim --headless +UpdateRemotePlugins +qa
@@ -131,6 +134,7 @@ install_packages
 construct_shell_config
 setup_antigen
 set_xdg_config_var
+install_pyenv
 setup_neovim
 setup_fonts_for_powerline
 setup_fzf

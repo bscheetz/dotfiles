@@ -12,14 +12,6 @@ alias_nvim () {
       fi
 }
 
-set_python3_path () {
-      if [ "$(uname)" = "Linux" ]; then
-            export PYTHON3PATH="$HOME/miniconda3/bin/python3"
-      elif [ "$(uname)" = "Darwin" ]; then
-            export PYTHON3PATH="$HOME/miniconda/bin/python3"
-      fi
-}
-
 set_up_antigen () {
       # ZSH package manager
       source ~/.antigen.zsh
@@ -84,7 +76,6 @@ alias git='nocorrect git'
 alias rg='nocorrect rg'
 
 alias_nvim
-set_python3_path
 set_xdg_config_path
 set_up_direnv
 add_poetry_to_path
