@@ -7,4 +7,6 @@ RUN apt-get update && \
       software-properties-common \
       vim
 
+COPY . /dotfiles
+
 CMD /bin/bash
