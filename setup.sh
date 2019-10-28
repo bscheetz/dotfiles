@@ -19,9 +19,14 @@ install_alacritty () {
 
 install_pyenv () {
 	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-	eval "$(pyenv init -)"
+
 	export PYENV_ROOT="$HOME/.pyenv"
 	export PATH="$PYENV_ROOT/bin:$PATH"
+
+	git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
 }
 
 install_packages () {
@@ -97,6 +102,9 @@ setup_neovim () {
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	cd $pri_dir
 
+	if [[ ! $(pyenv versions | grep 3.7.3) ]]; then
+		pyenv install 3.7.3
+	fi
 	pyenv virtualenv 3.7.3 neovim3
 	pyenv activate neovim3
 
@@ -106,6 +114,8 @@ setup_neovim () {
 
 	nvim --headless +PlugInstall +qa
 	nvim --headless +UpdateRemotePlugins +qa
+
+	pyenv deactivate
 }
 
 setup_fonts_for_powerline () {

@@ -3,7 +3,7 @@ function! DoRemote(arg)
 endfunction
 
 let g:loaded_python_provider = 0
-let g:python3_host_prog = $PYTHON3PATH
+let g:python3_host_prog = "$PYENV_ROOT/versions/neovim3/bin/python3"
 
 set nocompatible
 
