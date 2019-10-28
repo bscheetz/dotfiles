@@ -163,4 +163,5 @@ setup_tmux
 
 # Change user's default shell to zsh
 chsh -s $(which zsh)
+export SHELL=$(which zsh)
 zsh
