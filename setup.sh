@@ -89,6 +89,23 @@ set_xdg_config_var () {
 	fi
 }
 
+install_python_version (){
+	if [[ ! $(pyenv versions | grep 3.7.3) ]]; then
+		pyenv install 3.7.3
+	fi
+}
+
+install_pipx () {
+	python3 -m pip install --user pipx
+	python3 -m pipx ensurepath
+
+	export PATH="$HOME/.local/bin:$PATH"
+}
+
+install_poetry () {
+	pipx install poetry
+}
+
 setup_tmux () {
 	cp .tmux.conf $HOME
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
@@ -105,9 +122,7 @@ setup_neovim () {
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	cd $pri_dir
 
-	if [[ ! $(pyenv versions | grep 3.7.3) ]]; then
-		pyenv install 3.7.3
-	fi
+	install_python_version
 	pyenv virtualenv 3.7.3 neovim3
 	pyenv activate neovim3
 
@@ -142,6 +157,8 @@ construct_shell_config
 install_antigen
 set_xdg_config_var
 install_pyenv
+install_pipx
+install_poetry
 setup_neovim
 setup_fonts_for_powerline
 setup_fzf
