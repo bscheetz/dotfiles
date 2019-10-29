@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 shell_config=".zshrc"
 str="alias vi='nvim'"
