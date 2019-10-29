@@ -5,19 +5,6 @@ shell_config=".zshrc"
 str="alias vi='nvim'"
 
 
-install_alacritty () {
-	# install alacritty
-	if ! [ -x "$(command -v rustup)" ]; then
-		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-		export PATH="$PATH:$HOME/.cargo/bin"
-	fi
-
-	if ! [ -x "$(command -v alacritty)" ]; then
-	    # install alacritty
-	    cargo install --git https://github.com/jwilm/alacritty
-	fi
-}
-
 install_pyenv () {
 	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
@@ -76,8 +63,6 @@ install_packages () {
 			tmux
 
 	fi
-
-	install_alacritty
 
 }
 
