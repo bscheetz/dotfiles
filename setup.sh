@@ -43,6 +43,7 @@ install_packages () {
 				libfontconfig1-dev \
 				xclip \
 				python3-pip \
+				python3-venv \
 				direnv \
 				ripgrep \
 				tmux
