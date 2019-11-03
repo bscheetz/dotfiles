@@ -67,7 +67,10 @@ Plug 'ludovicchabant/vim-gutentags' " auto update tags
 Plug 'nielsmadan/harlequin'		" sublime text coloring
 Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-grepper' " find text anywhere in project
+Plug 'ryanoasis/vim-devicons' " nice icons
 Plug 'Shougo/defx.nvim' " directory lister
+Plug 'kristijanhusak/defx-icons' " icons for defx
+Plug 'kristijanhusak/defx-git' " icons for defx-git
 Plug 'rakr/vim-one' " vim-one theme
 call plug#end()
 
@@ -125,5 +128,38 @@ nmap <Leader>t :Tags<CR>
 " search in entire project
 nmap <Leader>fp :Rg<Space>
 
+" Defx
+call defx#custom#column('icon', {
+            \ 'directory_icon': '⯈',
+            \ 'opened_icon': '⯆',
+            \ })
+" Git
+let g:defx_git#indicators = {
+  \ 'Modified'  : '✹',
+  \ 'Staged'    : '✚',
+  \ 'Untracked' : '✭',
+  \ 'Renamed'   : '➜',
+  \ 'Unmerged'  : '═',
+  \ 'Ignored'   : '☒',
+  \ 'Deleted'   : '✖',
+  \ 'Unknown'   : '?'
+  \ }
+let g:defx_git#column_length = 1
+let g:defx_git#show_ignored = 0
+let g:defx_git#raw_mode = 0
+" Icons
+let g:defx_icons_enable_syntax_highlight = 1
+let g:defx_icons_column_length = 2
+let g:defx_icons_directory_icon = ''
+let g:defx_icons_mark_icon = '*'
+let g:defx_icons_parent_icon = ''
+let g:defx_icons_default_icon = ''
+let g:defx_icons_directory_symlink_icon = ''
+" Options below are applicable only when using "tree" feature
+let g:defx_icons_root_opened_tree_icon = ''
+let g:defx_icons_nested_opened_tree_icon = ''
+let g:defx_icons_nested_closed_tree_icon = ''
+
+" ale linters
 let b:ale_linters = {'python': ['pylint']}
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
