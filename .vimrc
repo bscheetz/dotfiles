@@ -58,7 +58,7 @@ Plug 'majutsushi/tagbar'	" show tags in sidebar
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'tpope/vim-sleuth'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'airblade/vim-gitgutter' " git status in the gutter
 Plug 'tpope/vim-fugitive' " amazing git integration
 Plug 'easymotion/vim-easymotion'
