@@ -113,9 +113,8 @@ setup_tmux () {
 }
 
 setup_neovim () {
-	cp .vimrc $HOME
 	mkdir -p $XDG_CONFIG_HOME/nvim/
-	cp init.vim $XDG_CONFIG_HOME/nvim/
+	echo "source ${PWD}/vim/.vimrc" > $XDG_CONFIG_HOME/nvim/init.vim
 
 	pri_dir=$(pwd)
 	cd $HOME
