@@ -14,13 +14,11 @@ alias_nvim () {
 
 set_up_antigen () {
       # ZSH package manager
-      source ~/.antigen.zsh
 
-      antigen bundle zsh-users/zsh-syntax-highlighting # syntax highlighting for shell
-      antigen bundle git # git shorthand
-      antigen bundle zsh-users/zsh-autosuggestions # code complete for shell
-      antigen theme refined
-      antigen apply
+      if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi # kubectl autocomplete
+
+      source ~/antigen.zsh
+      antigen init ~/.antigenrc
 }
 
 execute_tmux () {

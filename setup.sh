@@ -2,6 +2,7 @@
 set -e
 
 shell_config=".zshrc"
+antigen_config=".antigenrc"
 str="alias vi='nvim'"
 
 
@@ -80,7 +81,10 @@ construct_shell_config () {
 
 install_antigen () {
 	# zsh package manager
-	curl -L git.io/antigen > ~/.antigen.zsh
+	curl -L git.io/antigen > ~/antigen.zsh
+	if [ ! -f ~/$antigen_config ]; then
+		cp .antigenrc ~/$antigen_config
+	fi
 }
 
 set_xdg_config_var () {
