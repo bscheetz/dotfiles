@@ -1,6 +1,8 @@
 # for zshell
 autoload colors zsh/terminfo
 colors
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 precmd() { print "" }
 PS1="⟩"
 RPS1="%{$fg[magenta]%}%20<...<%~%<<%{$reset_color%}"
