@@ -22,9 +22,18 @@ install_packages () {
 	if [ "$(uname)" = "Linux" ]; then
 		yes '' | sudo apt-get install software-properties-common
 		yes '' | sudo add-apt-repository ppa:neovim-ppa/stable
-		sudo apt-get update
-		yes | sudo apt-get install \
-				apt-transport-https \
+
+		sudo apt install apt-transport-https --yes
+		curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+		# setup for kubectl
+		sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+		echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+		# setup for helm
+		echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+		sudo apt update
+		yes | sudo apt install \
 				ca-certificates \
 				curl \
 				openssl \
@@ -43,11 +52,14 @@ install_packages () {
 				libfreetype6-dev \
 				libfontconfig1-dev \
 				xclip \
+				helm \
 				python3-pip \
 				python3-venv \
 				direnv \
 				ripgrep \
-				tmux
+				tmux \
+				kubectl
+
 
 	elif [ "$(uname)" = "Darwin" ]; then
 		brew install \
@@ -57,11 +69,13 @@ install_packages () {
 			antigen \
 			direnv \
 			ripgrep \
+			helm \
 			openssl \
 			readline \
 			sqlite3 \
 			xz \
 			zlib \
+			kubectl \
 			tmux
 
 	fi
