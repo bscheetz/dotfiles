@@ -170,6 +170,14 @@ setup_fzf () {
 	yes | ~/.fzf/install
 }
 
+setup_kube_for_wsl () {
+	if [[ -z "${WSL_DISTRO_NAME}" && ! -f /etc/wsl.conf ]]; then
+		sudo sh -c 'echo "[automount]\ncrossDistro = true" > /etc/wsl.conf'
+	else
+		echo "/etc/wsl.conf exists"
+	fi
+}
+
 
 install_packages
 construct_shell_config
@@ -182,6 +190,7 @@ setup_neovim
 setup_fonts_for_powerline
 setup_fzf
 setup_tmux
+setup_kube_for_wsl
 
 # Change user's default shell to zsh
 chsh -s $(which zsh)
