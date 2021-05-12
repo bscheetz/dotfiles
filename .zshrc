@@ -66,6 +66,15 @@ add_local_bin_to_path () {
       export PATH="$PATH:$HOME/.local/bin"
 }
 
+set_up_cross_distro_mounts_wsl () {
+      if [[ ! -z "${WSL_DISTRO_NAME+x}" && ! -d /mnt/wsl/home ]]; then
+            # if WSL_DISTRO_NAME is set and the /mnt/wsl/home dir doesn't exist
+            # create it and bind home to it
+            mkdir /mnt/wsl/home
+            sudo mount --bind ~ /mnt/wsl/home
+      fi
+}
+
 # entering a directory automatically changes to that directory
 setopt auto_cd
 
@@ -80,6 +89,7 @@ alias rg='nocorrect rg'
 alias_nvim
 set_xdg_config_path
 set_up_direnv
+set_up_cross_distro_mounts_wsl
 add_poetry_to_path
 add_local_bin_to_path
 set_up_pyenv
