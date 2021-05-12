@@ -75,6 +75,10 @@ set_up_cross_distro_mounts_wsl () {
       fi
 }
 
+add_vue_cli_to_path () {
+      export PATH=~/.npm-global/bin:$PATH
+}
+
 # entering a directory automatically changes to that directory
 setopt auto_cd
 
@@ -92,6 +96,7 @@ set_up_direnv
 set_up_cross_distro_mounts_wsl
 add_poetry_to_path
 add_local_bin_to_path
+add_vue_cli_to_path
 set_up_pyenv
 set_up_fzf
 

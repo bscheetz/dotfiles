@@ -58,8 +58,9 @@ install_packages () {
 				direnv \
 				ripgrep \
 				tmux \
-				kubectl
-
+				kubectl \
+				nodejs \
+				npm
 
 	elif [ "$(uname)" = "Darwin" ]; then
 		brew install \
@@ -76,7 +77,8 @@ install_packages () {
 			xz \
 			zlib \
 			kubectl \
-			tmux
+			tmux \
+			node
 
 	fi
 
@@ -178,6 +180,13 @@ setup_kube_for_wsl () {
 	fi
 }
 
+install_vue_cli () {
+	mkdir ~/.npm-global
+	npm config set prefix '~/.npm-global'
+	export PATH=~/.npm-global/bin:$PATH
+	npm install -g @vue/cli
+}
+
 
 install_packages
 construct_shell_config
@@ -191,6 +200,7 @@ setup_fonts_for_powerline
 setup_fzf
 setup_tmux
 setup_kube_for_wsl
+install_vue_cli
 
 # Change user's default shell to zsh
 chsh -s $(which zsh)
