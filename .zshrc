@@ -16,11 +16,11 @@ alias_nvim () {
 
 set_up_antigen () {
       # ZSH package manager
-
       if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi # kubectl autocomplete
 
       source ~/antigen.zsh
       antigen init ~/.antigenrc
+
 }
 
 execute_tmux () {
@@ -79,6 +79,19 @@ add_vue_cli_to_path () {
       export PATH=~/.npm-global/bin:$PATH
 }
 
+set_up_cuda () {
+      if [[ ! -z "${WSL_DISTRO_NAME+x}" ]]; then
+            export PATH="/usr/local/cuda-11.0/bin:$PATH"
+            export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+      fi
+}
+
+set_up_nvm () {
+      export NVM_DIR="$HOME/.config/nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+
 # entering a directory automatically changes to that directory
 setopt auto_cd
 
@@ -99,5 +112,7 @@ add_local_bin_to_path
 add_vue_cli_to_path
 set_up_pyenv
 set_up_fzf
+set_up_cuda
+set_up_nvm
 
 execute_tmux

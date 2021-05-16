@@ -111,6 +111,10 @@ set_xdg_config_var () {
 	fi
 }
 
+install_nvm () {
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+}
+
 install_python_version (){
 	if [[ ! $(pyenv versions | grep 3.7.3) ]]; then
 		pyenv install 3.7.3
