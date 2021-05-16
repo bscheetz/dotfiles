@@ -23,7 +23,7 @@ install_packages () {
 		yes '' | sudo apt-get install software-properties-common
 		yes '' | sudo add-apt-repository ppa:neovim-ppa/stable
 
-		sudo apt install apt-transport-https --yes
+		sudo apt-get install apt-transport-https --yes
 		curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
 		# setup for kubectl
 		sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -32,8 +32,8 @@ install_packages () {
 		# setup for helm
 		echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 
-		sudo apt update
-		yes | sudo apt install \
+		sudo apt-get update
+		yes | sudo apt-get install \
 				ca-certificates \
 				curl \
 				openssl \
