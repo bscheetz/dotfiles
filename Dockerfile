@@ -5,6 +5,7 @@ WORKDIR /dotfiles
 RUN apt-get update && \
       apt-get -y install sudo \
       software-properties-common \
+      curl \
       vim
 
 COPY . /dotfiles
