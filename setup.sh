@@ -159,6 +159,7 @@ setup_neovim () {
 
 setup_fonts_for_powerline () {
 	# set up powerline and its fonts
+	cd $HOME
 	git clone --depth 1 https://github.com/powerline/fonts
 	cd fonts
 	./install.sh
