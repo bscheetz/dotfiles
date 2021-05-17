@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 RUN apt-get update && \
     apt-get install sudo && \
-    adduser --gecos '' user && \
+    adduser --gecos '' --home /home/user user && \
     echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 USER user
