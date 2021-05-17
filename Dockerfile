@@ -1,13 +1,16 @@
 FROM ubuntu:20.04
 
-WORKDIR /dotfiles
-
 RUN apt-get update && \
-      apt-get -y install sudo \
-      software-properties-common \
-      curl \
-      vim
+    apt-get install sudo && \
+    adduser --gecos '' --home /home/user user && \
+    echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-COPY . /dotfiles
+USER user
+
+WORKDIR /home/user/dotfiles
+
+RUN sudo apt-get -y install software-properties-common curl vim
+
+COPY . /home/user/dotfiles
 
 CMD /bin/bash

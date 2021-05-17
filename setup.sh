@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+WORKDIR="/home/user/dotfiles"
 shell_config=".zshrc"
 antigen_config=".antigenrc"
 str="alias vi='nvim'"
@@ -58,8 +59,9 @@ install_packages () {
 				direnv \
 				ripgrep \
 				tmux \
-				kubectl
-
+				kubectl \
+				nodejs \
+				npm
 
 	elif [ "$(uname)" = "Darwin" ]; then
 		brew install \
@@ -76,7 +78,8 @@ install_packages () {
 			xz \
 			zlib \
 			kubectl \
-			tmux
+			tmux \
+			node
 
 	fi
 
@@ -126,7 +129,7 @@ install_poetry () {
 }
 
 setup_tmux () {
-	cp .tmux.conf $HOME
+	cp $WORKDIR/.tmux.conf $HOME
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 }
 
@@ -157,11 +160,13 @@ setup_neovim () {
 
 setup_fonts_for_powerline () {
 	# set up powerline and its fonts
+	cd $HOME
 	git clone --depth 1 https://github.com/powerline/fonts
 	cd fonts
 	./install.sh
 	cd ..
 	rm -rf fonts
+	cd $WORKDIR
 }
 
 setup_fzf () {
@@ -178,6 +183,13 @@ setup_kube_for_wsl () {
 	fi
 }
 
+install_vue_cli () {
+	mkdir ~/.npm-global
+	npm config set prefix '~/.npm-global'
+	export PATH=~/.npm-global/bin:$PATH
+	npm install -g @vue/cli
+}
+
 
 install_packages
 construct_shell_config
@@ -191,8 +203,9 @@ setup_fonts_for_powerline
 setup_fzf
 setup_tmux
 setup_kube_for_wsl
+install_vue_cli
 
 # Change user's default shell to zsh
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh) user
 export SHELL=$(which zsh)
 zsh
