@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+WORKDIR="/home/user/dotfiles"
 shell_config=".zshrc"
 antigen_config=".antigenrc"
 str="alias vi='nvim'"
@@ -128,7 +129,7 @@ install_poetry () {
 }
 
 setup_tmux () {
-	cp .tmux.conf $HOME
+	cp $WORKDIR/.tmux.conf $HOME
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 }
 
@@ -165,6 +166,7 @@ setup_fonts_for_powerline () {
 	./install.sh
 	cd ..
 	rm -rf fonts
+	cd $WORKDIR
 }
 
 setup_fzf () {
