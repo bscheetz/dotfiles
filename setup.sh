@@ -206,6 +206,6 @@ setup_kube_for_wsl
 install_vue_cli
 
 # Change user's default shell to zsh
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh) user
 export SHELL=$(which zsh)
 zsh
