@@ -1,12 +1,15 @@
 FROM ubuntu:20.04
 
+RUN apt-get update && \
+    apt-get install sudo && \
+    adduser --gecos '' user && \
+    echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
+USER user
+
 WORKDIR /dotfiles
 
-RUN apt-get update && \
-      apt-get -y install sudo \
-      software-properties-common \
-      curl \
-      vim
+RUN sudo apt-get -y install software-properties-common curl vim
 
 COPY . /dotfiles
 
