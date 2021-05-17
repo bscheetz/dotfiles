@@ -7,10 +7,10 @@ RUN apt-get update && \
 
 USER user
 
-WORKDIR /dotfiles
+WORKDIR /home/user/dotfiles
 
 RUN sudo apt-get -y install software-properties-common curl vim
 
-COPY . /dotfiles
+COPY . /home/user/dotfiles
 
 CMD /bin/bash
