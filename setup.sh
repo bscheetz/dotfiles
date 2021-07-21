@@ -5,6 +5,7 @@ WORKDIR="${PWD}"
 shell_config=".zshrc"
 antigen_config=".antigenrc"
 str="alias vi='nvim'"
+NEOVIM_PYENV_VER="3.9.6"
 
 
 install_pyenv () {
@@ -127,10 +128,15 @@ install_python_version (){
 }
 
 install_pipx () {
-    python3 -m pip install --user pipx
-    python3 -m pipx ensurepath
+    if [[ "$(uname)" == "Darwin" ]]; then
+        brew install pipx
+        pipx ensurepath
+    else
+        python3 -m pip install --user pipx
+        python3 -m pipx ensurepath
 
-    export PATH="$HOME/.local/bin:$PATH"
+        export PATH="$HOME/.local/bin:$PATH"
+    fi
 }
 
 install_poetry () {
@@ -141,7 +147,9 @@ install_poetry () {
 
 setup_tmux () {
     cp $WORKDIR/.tmux.conf $HOME
-    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+        git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    fi
 }
 
 setup_neovim () {
@@ -157,7 +165,7 @@ setup_neovim () {
 
     install_python_version
     if [[ ! $(pyenv versions | grep neovim3) ]]; then
-        pyenv virtualenv 3.7.3 neovim3
+        pyenv virtualenv $NEOVIM_PYENV_VER neovim3
     fi
     pyenv activate neovim3
 
@@ -183,23 +191,29 @@ setup_fonts_for_powerline () {
 }
 
 setup_fzf () {
-    git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf
-    # install fzf and answer yes to all its prompts
-    yes | ~/.fzf/install
+    if [[ ! -d ~/.fzf ]]; then
+        git clone --depth 1 https://github.com/junegunn/fzf ~/.fzf
+        # install fzf and answer yes to all its prompts
+        yes | ~/.fzf/install
+    fi
 }
 
 setup_kube_for_wsl () {
-    if [[ -z "${WSL_DISTRO_NAME}" && ! -f /etc/wsl.conf ]]; then
-        sudo sh -c 'echo "[automount]\ncrossDistro = true" > /etc/wsl.conf'
-    else
-        echo "/etc/wsl.conf exists"
+    if [[ "$(uname)" == "Linux" ]]; then
+        if [[ -z "${WSL_DISTRO_NAME}" && ! -f /etc/wsl.conf ]]; then
+            sudo sh -c 'echo "[automount]\ncrossDistro = true" > /etc/wsl.conf'
+        else
+            echo "/etc/wsl.conf exists"
+        fi
     fi
 }
 
 install_vue_cli () {
-    mkdir ~/.npm-global
-    npm config set prefix '~/.npm-global'
-    export PATH=~/.npm-global/bin:$PATH
+    if [[ ! -d ~/.npm-global ]]; then
+        mkdir ~/.npm-global
+        npm config set prefix '~/.npm-global'
+        export PATH=~/.npm-global/bin:$PATH
+    fi
     npm install -g @vue/cli
 }
 
