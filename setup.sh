@@ -122,8 +122,8 @@ install_nvm () {
 }
 
 install_python_version (){
-    if [[ ! $(pyenv versions | grep 3.7.3) ]]; then
-        pyenv install 3.7.3
+    if [[ ! $(pyenv versions | grep $NEOVIM_PYENV_VER) ]]; then
+        pyenv install $NEOVIM_PYENV_VER
     fi
 }
 
