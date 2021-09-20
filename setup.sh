@@ -14,7 +14,7 @@ install_pyenv () {
     fi
 
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
+    export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
     pyenv_venv_dir=$(pyenv root)/plugins/pyenv-virtualenv
 
     if [ ! -d $pyenv_venv_dir ]; then
