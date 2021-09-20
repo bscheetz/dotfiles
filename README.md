@@ -1,4 +1,8 @@
-To setup VIM the first time:
+# USAGE
+Execute the setup.sh file from the dotfiles directory.
+
+# Useful Setup Commands
+Install Vim packages if they didn't install automatically (they should).
     execute ":PlugInstall"
 
 To set up tmux the first time:
