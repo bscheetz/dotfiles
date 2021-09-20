@@ -1,19 +1,24 @@
 #!/bin/bash
 set -e
 
-WORKDIR="/home/user/dotfiles"
+WORKDIR="${PWD}"
 shell_config=".zshrc"
 antigen_config=".antigenrc"
 str="alias vi='nvim'"
 
 
 install_pyenv () {
-	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+	if [ ! -d ~/.pyenv ]; then
+        git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    fi
 
 	export PYENV_ROOT="$HOME/.pyenv"
 	export PATH="$PYENV_ROOT/bin:$PATH"
+    pyenv_venv_dir=$(pyenv root)/plugins/pyenv-virtualenv
 
-	git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+	if [ ! -d $pyenv_venv_dir ]; then
+        git clone https://github.com/pyenv/pyenv-virtualenv.git $pyenv_venv_dir
+    fi
 
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
@@ -129,7 +134,9 @@ install_pipx () {
 }
 
 install_poetry () {
-	pipx install poetry
+	if [[ ! $(pipx list | grep "poetry") ]]; then
+        pipx install poetry
+    fi
 }
 
 setup_tmux () {
@@ -149,7 +156,9 @@ setup_neovim () {
 	cd $pri_dir
 
 	install_python_version
-	pyenv virtualenv 3.7.3 neovim3
+	if [[ ! $(pyenv versions | grep neovim3) ]]; then
+        pyenv virtualenv 3.7.3 neovim3
+    fi
 	pyenv activate neovim3
 
 	pip install jedi
@@ -210,6 +219,6 @@ setup_kube_for_wsl
 install_vue_cli
 
 # Change user's default shell to zsh
-sudo chsh -s $(which zsh) user
+sudo chsh -s $(which zsh) $USER
 export SHELL=$(which zsh)
 zsh
