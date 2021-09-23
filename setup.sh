@@ -198,14 +198,21 @@ setup_fzf () {
     fi
 }
 
-setup_kube_for_wsl () {
-    if [[ "$(uname)" == "Linux" ]]; then
-        if [[ -z "${WSL_DISTRO_NAME}" && ! -f /etc/wsl.conf ]]; then
-            sudo sh -c 'echo "[automount]\ncrossDistro = true" > /etc/wsl.conf'
-        else
-            echo "/etc/wsl.conf exists"
-        fi
-    fi
+install_docker () {
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpgI
+    echo \
+        "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    sudo service docker start
+}
+
+install_minikube () {
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube
 }
 
 install_vue_cli () {
@@ -229,7 +236,8 @@ setup_neovim
 setup_fonts_for_powerline
 setup_fzf
 setup_tmux
-setup_kube_for_wsl
+install_docker
+install_minikube
 install_vue_cli
 
 # Change user's default shell to zsh
