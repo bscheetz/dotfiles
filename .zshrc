@@ -92,6 +92,10 @@ set_up_nvm () {
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
 
+set_up_minikube () {
+      eval $(minikube docker-env)
+}
+
 # entering a directory automatically changes to that directory
 setopt auto_cd
 
@@ -114,5 +118,6 @@ set_up_pyenv
 set_up_fzf
 set_up_cuda
 set_up_nvm
+set_up_minikube
 
 execute_tmux
