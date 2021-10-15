@@ -30,3 +30,10 @@ in .tmux.conf change the default shell to /bin/zsh instead of $SHELL
 # Getting Kubernetes in Docker working on Windows
 Add the below to C:\Windows\System32\drivers\etc\hosts file\
 `127.0.0.1 kubernetes.docker.internal`
+
+
+# WSL - CrossDistro Mounting (useful for kubernetes volume mounting)
+As described https://github.com/docker/for-win/issues/5325
+1. Ensure cross distro mounts are set up in /etc/wsl.conf
+2. Create a directory in /mnt/wsl
+3. Mount the directory you want to be shareable to that folder via `sudo mount --bind {source_dir} /mnt/wsl/{mount_point}`
