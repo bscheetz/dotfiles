@@ -140,8 +140,8 @@ install_pipx () {
 }
 
 install_poetry () {
-    if [[ ! $(pipx list | grep "poetry") ]]; then
-        pipx install poetry
+    if [[ ! $(poetry) ]]; then
+        curl -sSL https://install.python-poetry.org | python3 -
     fi
 }
 
