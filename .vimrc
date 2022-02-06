@@ -72,6 +72,7 @@ Plug 'Shougo/defx.nvim' " directory lister
 Plug 'kristijanhusak/defx-icons' " icons for defx
 Plug 'kristijanhusak/defx-git' " icons for defx-git
 Plug 'rakr/vim-one' " vim-one theme
+Plug 'christoomey/vim-tmux-navigator' " removes need for tmux prefix in navigating between tmux and vim panes
 call plug#end()
 
 
