@@ -9,13 +9,13 @@ To set up tmux the first time:
     <prefix> + I
 
 # Windows Setup (for fonts, etc.)
-- Go to https://github.com/powerline/fonts
+- Go to https://github.com/ryanoasis/nerd-fonts
 - download the zip file
 - extract the file
 - open powershell
 - execute the `install.ps1` script to install fonts on Windows
 
-- select one of the Powerline fonts for minTTY and apply it
+- select one of the Powerline fonts for Windows Terminal
 - DONE
 
 # Issues with tmux and zsh

@@ -179,14 +179,14 @@ setup_neovim () {
     pyenv deactivate
 }
 
-setup_fonts_for_powerline () {
+setup_fonts () {
     # set up powerline and its fonts
     cd $HOME
-    git clone --depth 1 https://github.com/powerline/fonts
-    cd fonts
+    git clone --depth 1 https://github.com/ryanoasis/nerd-fonts
+    cd nerd-fonts
     ./install.sh
     cd ..
-    rm -rf fonts
+    rm -rf nerd-fonts
     cd $WORKDIR
 }
 
@@ -226,7 +226,7 @@ install_pyenv
 install_pipx
 install_poetry
 setup_neovim
-setup_fonts_for_powerline
+setup_fonts
 setup_fzf
 setup_tmux
 setup_kube_for_wsl
