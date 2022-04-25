@@ -67,6 +67,17 @@ return packer.startup(function(use)
     -- colorscheme
     use "LunarVim/darkplus.nvim"
 
+    use {
+        "nvim-treesitter/nvim-treesitter",
+        commit = "6a437db",
+        run = ":TSUpdate",
+    }
+    -- Telescope
+    use {
+        "nvim-telescope/telescope.nvim",
+        commit = "d88094f",
+    }
+
     use "christoomey/vim-tmux-navigator"
 
     if PACKER_BOOTSTRAP then
