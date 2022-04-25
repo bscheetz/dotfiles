@@ -1,30 +1,34 @@
 vim.g.loaded_python_provider = 0
 vim.g.python3_host_prog = "$PYENV_ROOT/versions/neovim3/bin/python3"
 
-vim.opt.compatible = false
-vim.opt.nu = true
-vim.opt.ruler = true
-vim.opt.encoding = "utf-8"
-vim.opt.wrap = false
--- set tab width to 4 spaces
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
--- replace tab with spaces
-vim.opt.expandtab = true
+local options = {
+    compatible = false,
+    nu = true,
+    ruler = true,
+    encoding = "utf-8",
+    wrap = false,
+    -- set tab width to 4 spaces
+    tabstop = 4,
+    shiftwidth = 4,
+    -- replace tab with spaces
+    expandtab = true,
+    cursorcolumn = true,
+    cursorline = true,
+    autoindent = true,
+    backspace = "indent,eol,start",
+    -- turn on incremental search
+    incsearch = true,
+    errorbells = false,
+    number = true,
+    -- highlight search matches
+    hlsearch = true,
+    -- set relative line numbers instead of absolute
+    relativenumber = true,
+}
 
-vim.opt.cursorcolumn = true
-vim.opt.cursorline = true
-vim.opt.autoindent = true
-vim.opt.backspace = "indent,eol,start"
--- turn on incremental search
-vim.opt.incsearch = true
-vim.opt.errorbells = false
-vim.opt.number = true
--- highlight search matches
-vim.opt.hlsearch = true
--- set relative line numbers instead of absolute
-vim.opt.relativenumber = true
-
+for k, v in pairs(options) do
+    vim.opt[k] = v
+end
 -- map arrow keys in normal mode to shift pane edges
 vim.api.nvim_set_keymap("n", "<Left>", ":vertical resize -1<CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<Right>", ":vertical resize +1<CR>", {noremap = true})
@@ -97,7 +101,9 @@ vim.api.nvim_set_keymap(
 )
 
 vim.api.nvim_set_keymap("n", "<F8>", ":TagbarToggle<CR>", {})
---vim.opt.statusline = vim.opt.statusline .. "%#warningmsg#"
+vim.cmd "set statusline+=%#warningmsg#"
+vim.cmd "set statusline+=%{fugitive#statusline()}"
+vim.cmd "set statusline+=%*"
 
 vim.api.nvim_set_keymap("n", ";", ":Buffers<CR>", {})
 vim.api.nvim_set_keymap("n", "<Leader>f", ":Files<CR>", {})
