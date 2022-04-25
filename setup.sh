@@ -153,9 +153,7 @@ setup_tmux () {
 }
 
 setup_neovim () {
-    cp .vimrc $HOME
-    mkdir -p $XDG_CONFIG_HOME/nvim/lua/
-    cp init.lua $XDG_CONFIG_HOME/nvim/lua/
+    ln -s ${PWD}/nvim $XDG_CONFIG_HOME/nvim
 
     pri_dir=$(pwd)
     cd $HOME
