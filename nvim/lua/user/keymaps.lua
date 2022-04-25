@@ -45,3 +45,5 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("n", "<Leader>f", ":Telescope find_files<CR>", opts)
 keymap("n", "<Leader>fp", ":Telescope grep_string<CR>", opts)
 keymap("n", ";", ":Telescope buffers<CR>", opts)
+
+keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
