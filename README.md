@@ -9,13 +9,13 @@ To set up tmux the first time:
     <prefix> + I
 
 # Windows Setup (for fonts, etc.)
-- Go to https://github.com/powerline/fonts
+- Go to https://github.com/ryanoasis/nerd-fonts
 - download the zip file
 - extract the file
 - open powershell
 - execute the `install.ps1` script to install fonts on Windows
 
-- select one of the Powerline fonts for minTTY and apply it
+- select one of the Powerline fonts for Windows Terminal
 - DONE
 
 # Issues with tmux and zsh
@@ -37,3 +37,6 @@ As described https://github.com/docker/for-win/issues/5325
 1. Ensure cross distro mounts are set up in /etc/wsl.conf
 2. Create a directory in /mnt/wsl
 3. Mount the directory you want to be shareable to that folder via `sudo mount --bind {source_dir} /mnt/wsl/{mount_point}`
+
+# NVIM config
+Much of this lua neovim config was inspired or copied from https://github.com/LunarVim/Neovim-from-scratch
