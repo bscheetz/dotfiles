@@ -44,6 +44,7 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
     use "akinsho/bufferline.nvim"
+    use "windwp/nvim-autopairs"
 
     use "nvim-lualine/lualine.nvim"
 
