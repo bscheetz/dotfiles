@@ -14,6 +14,5 @@ require "user.gitsigns"
 require "user.bufferline"
 
 vim.cmd 'filetype plugin on'
---vim.cmd 'set rtp+=~/.fzf'
 
 vim.cmd "colorscheme darkplus"
