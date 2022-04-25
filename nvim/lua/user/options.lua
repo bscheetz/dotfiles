@@ -21,6 +21,9 @@ local options = {
     hlsearch = true,
     -- set relative line numbers instead of absolute
     relativenumber = true,
+    background = "dark",
+    termguicolors = true,
+    laststatus=2,
 }
 
 for k, v in pairs(options) do

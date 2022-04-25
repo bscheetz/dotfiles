@@ -1,22 +1,9 @@
 require "user.options"
+require "user.keymaps"
+
 vim.g.loaded_python_provider = 0
 vim.g.python3_host_prog = "$PYENV_ROOT/versions/neovim3/bin/python3"
 
--- map arrow keys in normal mode to shift pane edges
-vim.api.nvim_set_keymap("n", "<Left>", ":vertical resize -1<CR>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Right>", ":vertical resize +1<CR>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Up>", ":resize -1<CR>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Down>", ":resize +1<CR>", {noremap = true})
-
--- return to the last file opened by pressing leader leader
-vim.api.nvim_set_keymap("n", "<Leader><Leader>", "<c-^>", {})
-
--- press tab to switch to the next buffer
--- press shift tab to switch to the previous buffer
-vim.api.nvim_set_keymap("n", "<Tab>", ":bnext!<CR>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev!<CR>", {noremap = true})
-
-vim.g.mapleader = " "
 vim.cmd 'filetype plugin on'
 vim.cmd 'set rtp+=~/.fzf'
 
@@ -55,11 +42,6 @@ vim.g.airline_powerline_fonts = 1
 -- TODO FIX
 vim.cmd('let g:airline#extension#tabline#enabled = 1')
 
-vim.opt.laststatus=2
-
-vim.opt.termguicolors = true
-
-vim.opt.background = "dark"
 vim.cmd "colorscheme one"
 
 vim.g.SuperTabDefaultCompletionType = "<c-n>"
