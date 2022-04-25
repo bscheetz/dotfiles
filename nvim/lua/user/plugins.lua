@@ -77,6 +77,7 @@ return packer.startup(function(use)
         "nvim-telescope/telescope.nvim",
         commit = "d88094f",
     }
+    use "p00f/nvim-ts-rainbow"
 
     use "christoomey/vim-tmux-navigator"
 

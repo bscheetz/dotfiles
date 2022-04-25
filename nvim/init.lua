@@ -9,16 +9,6 @@ require "user.lsp"
 require "user.treesitter"
 
 vim.cmd 'filetype plugin on'
-vim.cmd 'set rtp+=~/.fzf'
+--vim.cmd 'set rtp+=~/.fzf'
 
 vim.cmd "colorscheme darkplus"
-
---vim.api.nvim_set_keymap("n", ";", ":Buffers<CR>", {})
---vim.api.nvim_set_keymap("n", "<Leader>f", ":Files<CR>", {})
---vim.api.nvim_set_keymap("n", "<Leader>t", ":Tags<CR>", {})
-
---vim.api.nvim_set_keymap("n", "<Leader>fp", ":Rg<Space>", {})
-
--- ale linters
--- vim.b.ale_linters = {python = {"pylint"}}
--- vim.b.ale_fixers = {"remove_trailing_lines", "trime_whitespace"}
