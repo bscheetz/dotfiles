@@ -97,6 +97,8 @@ setopt auto_cd
 
 set_up_antigen
 
+# enable vim mode
+bindkey -v
 # correct typos. ignore `git status` because there is some glitch
 setopt correctall
 alias make='nocorrect make'
