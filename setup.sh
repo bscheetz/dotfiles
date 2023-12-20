@@ -65,7 +65,8 @@ install_packages () {
                 direnv \
                 ripgrep \
                 tmux \
-                kubectl
+                kubectl \
+                clangd
 
         # install node
         curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
