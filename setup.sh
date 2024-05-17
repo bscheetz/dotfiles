@@ -18,7 +18,7 @@ install_pyenv () {
     pyenv_venv_dir=$(pyenv root)/plugins/pyenv-virtualenv
 
     if [ ! -d $pyenv_venv_dir ]; then
-        git clone https://github.com/pyenv/pyenv-virtualenv.git $pyenv_venv_dir
+        curl https://pyenv.run | bash
     fi
 
     eval "$(pyenv init -)"
@@ -31,13 +31,7 @@ install_packages () {
         yes '' | sudo add-apt-repository ppa:neovim-ppa/stable
 
         sudo apt-get install apt-transport-https --yes
-        curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-        # setup for kubectl
-        sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-        echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-        # setup for helm
-        echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 
         sudo apt-get update
         yes | sudo apt-get install \
@@ -51,31 +45,46 @@ install_packages () {
                 libbz2-dev \
                 libssl-dev \
                 libsqlite3-dev \
+                liblzma-dev \
                 zsh \
-                ctags \
+                universal-ctags \
                 neovim \
                 zsh-antigen \
                 cmake \
                 libfreetype6-dev \
                 libfontconfig1-dev \
                 xclip \
-                helm \
                 python3-pip \
                 python3-venv \
                 direnv \
                 ripgrep \
                 tmux \
-                kubectl \
                 clangd
 
         # install node
         curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
         sudo apt-get install -y nodejs
 
+    	# setup for kubectl
+    	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    	sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+	sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
+	sudo apt-get update
+	sudo apt install -y kubectl
+
+    	# setup for helm
+	curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+	sudo apt-get install apt-transport-https --yes
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+	sudo apt-get update
+	sudo apt-get install helm
+
+
     elif [ "$(uname)" = "Darwin" ]; then
         brew install \
             zsh \
-            ctags \
+            universal-ctags \
             neovim \
             antigen \
             direnv \
@@ -91,6 +100,7 @@ install_packages () {
             node
 
     fi
+
 
 }
 
@@ -135,8 +145,8 @@ install_pipx () {
         brew install pipx
         pipx ensurepath
     else
-        python3 -m pip install --user pipx
-        python3 -m pipx ensurepath
+        sudo apt install pipx
+        pipx ensurepath
 
         export PATH="$HOME/.local/bin:$PATH"
     fi
