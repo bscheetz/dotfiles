@@ -186,6 +186,7 @@ setup_neovim () {
 
     nvim --headless +PlugInstall +qa
     nvim --headless +UpdateRemotePlugins +qa
+    nvim --headless +"LspInstall pyright" +qa
 
     pyenv deactivate
 }

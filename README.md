@@ -4,6 +4,9 @@ Execute the setup.sh file from the dotfiles directory.
 # Useful Setup Commands
 Install Vim packages if they didn't install automatically (they should).
     execute ":PlugInstall"
+The `setup.sh` script also installs the `pyright` language server via `nvim-lsp-installer`.
+If needed, you can reinstall it manually inside Neovim:
+    :LspInstall pyright
 
 To set up tmux the first time:
     <prefix> + I
