@@ -9,15 +9,10 @@ NEOVIM_PYENV_VER="3.9.6"
 
 
 install_pyenv () {
-    if [ ! -d ~/.pyenv ]; then
-        git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-    fi
-
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
-    pyenv_venv_dir=$(pyenv root)/plugins/pyenv-virtualenv
 
-    if [ ! -d $pyenv_venv_dir ]; then
+    if [ ! -d $PYENV_ROOT ]; then
         curl https://pyenv.run | bash
     fi
 
@@ -58,17 +53,18 @@ install_packages () {
                 python3-venv \
                 direnv \
                 ripgrep \
-                tmux \
-                clangd
+               	tmux \
+               	clangd
 
         # install node
         curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
         sudo apt-get install -y nodejs
 
-    	# setup for kubectl
-    	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-    	sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+        # setup for kubectl
+	sudo mkdir -p /etc/apt/keyrings
+	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+        sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+        echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 	sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
 	sudo apt-get update
 	sudo apt install -y kubectl
@@ -145,10 +141,10 @@ install_pipx () {
         brew install pipx
         pipx ensurepath
     else
-        sudo apt install pipx
-        pipx ensurepath
-
+	sudo apt install python3-pip && pip install pipx
         export PATH="$HOME/.local/bin:$PATH"
+
+        pipx ensurepath
     fi
 }
 
@@ -186,6 +182,7 @@ setup_neovim () {
 
     nvim --headless +PlugInstall +qa
     nvim --headless +UpdateRemotePlugins +qa
+    nvim --headless +"LspInstall pylsp" +qa
 
     pyenv deactivate
 }
