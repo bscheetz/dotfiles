@@ -13,14 +13,17 @@ install_pyenv () {
         git clone https://github.com/pyenv/pyenv.git ~/.pyenv
     fi
 
+    echo "SETTING UP PYENV"
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
     pyenv_venv_dir=$(pyenv root)/plugins/pyenv-virtualenv
 
     if [ ! -d $pyenv_venv_dir ]; then
+	echo "RUNNING PYENV"
         curl https://pyenv.run | bash
     fi
 
+    echo "INITING PYENV"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 }
@@ -66,6 +69,7 @@ install_packages () {
         sudo apt-get install -y nodejs
 
         # setup for kubectl
+	sudo mkdir -p /etc/apt/keyrings
 	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
         sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
         echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
