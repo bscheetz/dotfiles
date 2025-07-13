@@ -9,21 +9,13 @@ NEOVIM_PYENV_VER="3.9.6"
 
 
 install_pyenv () {
-    if [ ! -d ~/.pyenv ]; then
-        git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-    fi
-
-    echo "SETTING UP PYENV"
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
-    pyenv_venv_dir=$(pyenv root)/plugins/pyenv-virtualenv
 
-    if [ ! -d $pyenv_venv_dir ]; then
-	echo "RUNNING PYENV"
+    if [ ! -d $PYENV_ROOT ]; then
         curl https://pyenv.run | bash
     fi
 
-    echo "INITING PYENV"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 }
@@ -149,10 +141,10 @@ install_pipx () {
         brew install pipx
         pipx ensurepath
     else
-        sudo apt install pipx
-        pipx ensurepath
-
+	sudo apt install python3-pip && pip install pipx
         export PATH="$HOME/.local/bin:$PATH"
+
+        pipx ensurepath
     fi
 }
 
