@@ -1,6 +1,7 @@
 vim.g.loaded_python_provider = 0
-vim.g.python3_host_prog = "$PYENV_ROOT/versions/neovim3/bin/python3"
+vim.g.python3_host_prog = os.getenv("PYENV_ROOT") .. "/versions/neovim3/bin/python3"
 
+require "user.colors"
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
@@ -15,4 +16,4 @@ require "user.bufferline"
 
 vim.cmd 'filetype plugin on'
 
-vim.cmd "colorscheme darkplus"
+vim.cmd 'colorscheme darkplus'

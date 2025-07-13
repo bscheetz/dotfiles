@@ -65,7 +65,7 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig" -- enable LSP
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
-    use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+    use "nvimtools/none-ls.nvim" -- for formatters and linters
 
     -- NvimTree
     use "kyazdani42/nvim-web-devicons"
@@ -75,8 +75,6 @@ return packer.startup(function(use)
 
     use {
         "nvim-treesitter/nvim-treesitter",
-        commit = "6a437db",
-        run = ":TSUpdate",
     }
     -- Telescope
     use {
