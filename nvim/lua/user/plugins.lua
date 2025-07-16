@@ -66,6 +66,12 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
     use "nvimtools/none-ls.nvim" -- for formatters and linters
+    use {
+        "folke/noice.nvim", -- better LSP UI
+        config = function() require("user.noice")
+            end,
+        requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+    }
 
     -- NvimTree
     use "kyazdani42/nvim-web-devicons"
@@ -77,9 +83,10 @@ return packer.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
     }
     -- Telescope
+    use "nvim-telescope/telescope.nvim"
     use {
-        "nvim-telescope/telescope.nvim",
-        commit = "d88094f",
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make",
     }
     use "p00f/nvim-ts-rainbow"
 
