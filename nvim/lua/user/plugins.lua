@@ -89,7 +89,7 @@ return packer.startup(function(use)
         "nvim-telescope/telescope-fzf-native.nvim",
         run = "make",
     }
-    use "p00f/nvim-ts-rainbow"
+    use "HiPhish/rainbow-delimiters.nvim"
 
     use "lewis6991/gitsigns.nvim"
     use "christoomey/vim-tmux-navigator"
