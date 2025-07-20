@@ -3,6 +3,7 @@ set -e
 
 WORKDIR="${PWD}"
 shell_config=".zshrc"
+nvm_config=".nvmrc"
 antigen_config=".antigenrc"
 str="alias vi='nvim'"
 NEOVIM_PYENV_VER="3.9.6"
@@ -108,6 +109,12 @@ construct_shell_config () {
         echo "FOUND"
     else
         cat .zshrc >> ~/$shell_config
+    fi
+}
+
+copy_nvm_config () {
+    if [ ! -f ~/$nvm_config ]; then
+        cp $nvm_config ~/$nvm_config
     fi
 }
 
@@ -228,6 +235,7 @@ install_vue_cli () {
 
 install_packages
 construct_shell_config
+copy_nvm_config
 install_antigen
 set_xdg_config_var
 install_pyenv
