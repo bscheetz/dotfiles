@@ -1,19 +1,19 @@
 local mason_status, mason = pcall(require, "mason")
 if not mason_status then
-  return
+    return
 end
 
 mason.setup()
 
 local mason_lsp_status, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not mason_lsp_status then
-  return
+    return
 end
 
-local servers = { "lua_ls", "jsonls" }
+local servers = { "lua_ls", "jsonls", "pyright" }
 
 mason_lspconfig.setup({
-  ensure_installed = servers,
+    ensure_installed = servers,
 })
 
 mason_lspconfig.setup({
@@ -28,7 +28,7 @@ local handler_opts = {
     capabilities = require("user.lsp.handlers").capabilities,
 }
 
-for _, server in ipairs(servers) do 
+for _, server in ipairs(servers) do
     local opts = vim.tbl_deep_extend("force", {}, handler_opts)
 
     local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings" .. server)
