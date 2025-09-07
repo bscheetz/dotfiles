@@ -4,18 +4,24 @@ if not null_ls_status_ok then
 end
 
 local sources = {
-	null_ls.builtins.formatting.stylua,
-	null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.prettier,
 }
 
 -- prefer eslint_d if available, else fall back to eslint
-local eslint = null_ls.builtins.diagnostics.eslint_d
-if not eslint then
-	eslint = null_ls.builtins.diagnostics.eslint
+-- these diagnostics were moved to none-ls-extras, so try loading them from there
+local eslint
+local ok, builtin = pcall(require, "none-ls.diagnostics.eslint_d")
+if not ok then
+        ok, builtin = pcall(require, "none-ls.diagnostics.eslint")
+end
+
+if ok then
+        eslint = builtin
 end
 
 if eslint then
-	table.insert(sources, eslint)
+        table.insert(sources, eslint)
 end
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

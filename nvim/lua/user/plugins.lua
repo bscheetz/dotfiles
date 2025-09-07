@@ -43,6 +43,7 @@ return require("lazy").setup({
     "williamboman/mason-lspconfig.nvim",
     "tamago324/nlsp-settings.nvim",
     "nvimtools/none-ls.nvim",
+    "nvimtools/none-ls-extras.nvim",
     {
       "folke/noice.nvim",
       dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
