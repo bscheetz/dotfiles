@@ -1,103 +1,71 @@
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+return require("lazy").setup({
+  "nvim-lua/popup.nvim",
+  "nvim-lua/plenary.nvim",
+  "akinsho/bufferline.nvim",
+  "windwp/nvim-autopairs",
+  "lewis6991/impatient.nvim",
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+  "nvim-lualine/lualine.nvim",
 
--- Have packer use a popup window
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
+  -- cmp plugins
+  "hrsh7th/nvim-cmp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-path",
+  "hrsh7th/cmp-cmdline",
+  "saadparwaiz1/cmp_luasnip",
+  "hrsh7th/cmp-nvim-lsp",
+
+  -- snippets
+  "L3MON4D3/LuaSnip",
+  "rafamadriz/friendly-snippets",
+
+  -- LSP
+  "neovim/nvim-lspconfig",
+  { "williamboman/mason.nvim", build = ":MasonUpdate" },
+  "williamboman/mason-lspconfig.nvim",
+  "tamago324/nlsp-settings.nvim",
+  "nvimtools/none-ls.nvim",
+  {
+    "folke/noice.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+    config = function()
+      require("user.noice")
+    end,
+  },
+
+  -- NvimTree
+  "kyazdani42/nvim-web-devicons",
+  "kyazdani42/nvim-tree.lua",
+  -- colorscheme
+  "LunarVim/darkplus.nvim",
+
+  "nvim-treesitter/nvim-treesitter",
+  -- Telescope
+  "nvim-telescope/telescope.nvim",
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  "HiPhish/rainbow-delimiters.nvim",
+
+  "lewis6991/gitsigns.nvim",
+  "christoomey/vim-tmux-navigator",
+}, {
+  ui = {
+    border = "rounded",
+  },
+  defaults = {
+    lazy = false,
+  },
 })
 
-return packer.startup(function(use)
-	use("wbthomason/packer.nvim")
-	use("nvim-lua/popup.nvim")
-	use("nvim-lua/plenary.nvim")
-	use("akinsho/bufferline.nvim")
-	use("windwp/nvim-autopairs")
-	use("lewis6991/impatient.nvim")
-
-	use("nvim-lualine/lualine.nvim")
-
-	-- cmp plugins
-	use("hrsh7th/nvim-cmp") -- The completion plugin
-	use("hrsh7th/cmp-buffer") -- buffer completions
-	use("hrsh7th/cmp-path") -- path completions
-	use("hrsh7th/cmp-cmdline") -- cmdline completions
-	use("saadparwaiz1/cmp_luasnip") -- snippet completions
-	use("hrsh7th/cmp-nvim-lsp")
-
-	-- snippets
-	use("L3MON4D3/LuaSnip") --snippet engine
-	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
-	-- LSP
-	use("neovim/nvim-lspconfig") -- enable LSP
-	use({ "williamboman/mason.nvim", run = ":MasonUpdate" })
-	use("williamboman/mason-lspconfig.nvim")
-	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
-	use({
-		"nvimtools/none-ls.nvim", -- for formatters and linters
-		requires = { "nvimtools/none-ls-extras.nvim" },
-	})
-	use({
-		"folke/noice.nvim", -- better LSP UI
-		config = function()
-			require("user.noice")
-		end,
-		requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-	})
-
-	-- NvimTree
-	use("kyazdani42/nvim-web-devicons")
-	use("kyazdani42/nvim-tree.lua")
-	-- colorscheme
-	use("LunarVim/darkplus.nvim")
-
-	use({
-		"nvim-treesitter/nvim-treesitter",
-	})
-	-- Telescope
-	use("nvim-telescope/telescope.nvim")
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
-	})
-	use("HiPhish/rainbow-delimiters.nvim")
-
-	use("lewis6991/gitsigns.nvim")
-	use("christoomey/vim-tmux-navigator")
-
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
-end)
