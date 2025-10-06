@@ -34,6 +34,9 @@ require("nvim-tree").setup({
         ignore = true,
         timeout = 500,
     },
+    renderer = {
+        root_folder_label = false,
+    },
     view = {
         width = 30,
         side = "left",
