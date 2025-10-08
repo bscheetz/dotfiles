@@ -1,4 +1,4 @@
-local default_schemas = nil
+local default_schemas = {}
 local status_ok, jsonls_settings = pcall(require, "nlspsettings.jsonls")
 if status_ok then
   default_schemas = jsonls_settings.get_default_schemas()
@@ -168,9 +168,10 @@ local function extend(tab1, tab2)
   return tab1
 end
 
-local extended_schemas = extend(schemas, default_schemas)
+local extended_schemas = extend(vim.deepcopy(schemas), default_schemas or {})
 
 local opts = {
+  filetypes = { "json", "jsonc" },
   settings = {
     json = {
       schemas = extended_schemas,

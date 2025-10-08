@@ -88,8 +88,17 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
+  if client.name == "jsonls" then
+    local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+    if filetype ~= "json" and filetype ~= "jsonc" then
+      vim.schedule(function()
+        vim.lsp.stop_client(client.id)
+      end)
+      return
+    end
+  end
+  if client.name == "tsserver" or client.name == "vtsls" then
+    client.server_capabilities.documentFormattingProvider = false
   end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client, bufnr)

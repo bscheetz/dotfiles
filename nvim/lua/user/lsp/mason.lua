@@ -10,7 +10,7 @@ if not mason_lsp_status then
 	return
 end
 
-local servers = { "lua_ls", "jsonls", "pyright", "vtsls" }
+local servers = { "lua_ls", "jsonls", "pyright", "vtsls", "svelte" }
 
 mason_lspconfig.setup({
 	ensure_installed = servers,
@@ -31,7 +31,7 @@ local handler_opts = {
 for _, server in ipairs(servers) do
 	local opts = vim.tbl_deep_extend("force", {}, handler_opts)
 
-	local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings" .. server)
+        local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings." .. server)
 	if has_custom_opts then
 		opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
 	end
