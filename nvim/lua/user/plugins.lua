@@ -56,8 +56,10 @@ return require("lazy").setup({
     "kyazdani42/nvim-tree.lua",
     -- colorscheme
     "LunarVim/darkplus.nvim",
-    
+
+    -- Treesitter
     "nvim-treesitter/nvim-treesitter",
+    "evanleck/vim-svelte",
     -- Telescope
     "nvim-telescope/telescope.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

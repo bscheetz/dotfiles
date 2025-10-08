@@ -1,6 +1,36 @@
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 
+local function on_attach(bufnr)
+    local api = require("nvim-tree.api")
+
+    local function opts(desc)
+        return {
+            desc = "nvim-tree: " .. desc,
+            buffer = bufnr,
+            noremap = true,
+            silent = true,
+            nowait = true,
+        }
+    end
+
+    local default_on_attach = api.config and api.config.mappings and api.config.mappings.default_on_attach
+    if type(default_on_attach) == "function" then
+        default_on_attach(bufnr)
+    else
+        local legacy_ok, legacy_mappings = pcall(require, "nvim-tree.mappings")
+        if legacy_ok then
+            local legacy_attach = legacy_mappings.default_on_attach or legacy_mappings.on_attach
+            if type(legacy_attach) == "function" then
+                legacy_attach(bufnr)
+            end
+        end
+    end
+
+    vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
+    vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Node"))
+end
+
 require("nvim-tree").setup({
     disable_netrw = true,
     hijack_netrw = true,
@@ -47,4 +77,5 @@ require("nvim-tree").setup({
         cmd = "trash",
         require_confirm = true,
     },
+    on_attach = on_attach,
 })
