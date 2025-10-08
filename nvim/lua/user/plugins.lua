@@ -57,9 +57,18 @@ return require("lazy").setup({
     -- colorscheme
     "LunarVim/darkplus.nvim",
 
-    -- Treesitter
-    "nvim-treesitter/nvim-treesitter",
-    "evanleck/vim-svelte",
+        -- Treesitter
+        {
+                "nvim-treesitter/nvim-treesitter",
+                build = ":TSUpdate",
+        },
+        {
+                "evanleck/vim-svelte",
+                ft = { "svelte" },
+                init = function()
+                        vim.g.svelte_preprocessors = { "typescript" }
+                end,
+        },
     -- Telescope
     "nvim-telescope/telescope.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

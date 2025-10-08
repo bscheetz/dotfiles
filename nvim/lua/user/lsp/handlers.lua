@@ -44,8 +44,21 @@ M.setup = function()
   })
 end
 
+local function can_highlight_document(client)
+  local capabilities = client.server_capabilities or client.resolved_capabilities
+  if not capabilities then
+    return false
+  end
+
+  if capabilities.documentHighlightProvider ~= nil then
+    return capabilities.documentHighlightProvider
+  end
+
+  return capabilities.document_highlighting or capabilities.documentHighlightingProvider
+end
+
 local function lsp_highlight_document(client, bufnr)
-  if client.server_capabilities.documentHighlightProvider then
+  if can_highlight_document(client) then
     local group = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
 
     vim.api.nvim_create_autocmd("CursorHold", {

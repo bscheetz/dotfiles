@@ -6,6 +6,7 @@ end
 configs.setup {
   ensure_installed = { "lua", "python", "bash", "javascript", "typescript", "tsx", "cpp", "svelte" }, -- one of "all" or a list of languages
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+  auto_install = true,
   ignore_install = { "" }, -- List of parsers to ignore installing
   autopairs = {
     enable = true,
