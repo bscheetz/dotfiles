@@ -14,7 +14,18 @@ local function on_attach(bufnr)
         }
     end
 
-    api.config.mappings.default_on_attach(bufnr)
+    local default_on_attach = api.config and api.config.mappings and api.config.mappings.default_on_attach
+    if type(default_on_attach) == "function" then
+        default_on_attach(bufnr)
+    else
+        local legacy_ok, legacy_mappings = pcall(require, "nvim-tree.mappings")
+        if legacy_ok then
+            local legacy_attach = legacy_mappings.default_on_attach or legacy_mappings.on_attach
+            if type(legacy_attach) == "function" then
+                legacy_attach(bufnr)
+            end
+        end
+    end
 
     vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
     vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Node"))
