@@ -10,16 +10,14 @@ if not mason_lsp_status then
     return
 end
 
-local servers = { "lua_ls", "jsonls", "pyright", "vtsls" }
+local lspconfig = require("lspconfig")
 
-mason_lspconfig.setup({
-    ensure_installed = servers,
-})
+local servers = { "lua_ls", "pyright", "svelte" } --"vtsls", "jsonls"
 
 mason_lspconfig.setup({
     ensure_installed = servers,
     automatic_installation = false,
-    automatic_enable = true,
+    automatic_enable = false,
 })
 
 local handler_opts = {
@@ -35,6 +33,5 @@ for _, server in ipairs(servers) do
         opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
     end
 
-    vim.lsp.config[server] = opts
-    vim.lsp.enable(server)
+    lspconfig[server].setup(opts)
 end
