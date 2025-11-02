@@ -24,7 +24,6 @@ install_pyenv () {
 install_packages () {
     if [ "$(uname)" = "Linux" ]; then
         yes '' | sudo apt-get install software-properties-common
-        yes '' | sudo add-apt-repository ppa:neovim-ppa/stable
 
         sudo apt-get install apt-transport-https --yes
 
@@ -44,7 +43,6 @@ install_packages () {
                 liblzma-dev \
                 zsh \
                 universal-ctags \
-                neovim \
                 zsh-antigen \
                 cmake \
                 libfreetype6-dev \
@@ -161,6 +159,22 @@ install_uv () {
     fi
 }
 
+install_latest_neovim () {
+    if [[ "$(uname)" != "Linux" ]]; then
+        return
+    fi
+
+    local nvim_archive="/tmp/nvim-linux64.tar.gz"
+    local nvim_download_url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+    local install_prefix="/usr/local"
+
+    curl -Lo "$nvim_archive" "$nvim_download_url"
+    sudo rm -rf "${install_prefix}/nvim-linux64"
+    sudo tar -C "$install_prefix" -xzf "$nvim_archive"
+    sudo ln -sfn "${install_prefix}/nvim-linux64/bin/nvim" /usr/local/bin/nvim
+    rm -f "$nvim_archive"
+}
+
 setup_tmux () {
     cp $WORKDIR/.tmux.conf $HOME
     if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
@@ -241,6 +255,7 @@ set_xdg_config_var
 install_pyenv
 install_pipx
 install_uv
+install_latest_neovim
 setup_neovim
 setup_fonts
 setup_fzf
