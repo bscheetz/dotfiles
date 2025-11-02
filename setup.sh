@@ -62,13 +62,13 @@ install_packages () {
         sudo apt-get install -y nodejs
 
         # setup for kubectl
-	sudo mkdir -p /etc/apt/keyrings
-	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
         sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-        echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-	sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
-	sudo apt-get update
-	sudo apt install -y kubectl
+        echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+        sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
+        sudo apt-get update
+        sudo apt install -y kubectl
 
     	# setup for helm
 	curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
@@ -155,9 +155,9 @@ install_pipx () {
     fi
 }
 
-install_poetry () {
-    if [[ ! $(pipx list | grep "poetry") ]]; then
-        pipx install poetry
+install_uv () {
+    if ! command -v uv >/dev/null 2>&1; then
+        curl -LsSf https://astral.sh/uv/install.sh | sh
     fi
 }
 
@@ -240,7 +240,7 @@ install_antigen
 set_xdg_config_var
 install_pyenv
 install_pipx
-install_poetry
+install_uv
 setup_neovim
 setup_fonts
 setup_fzf
