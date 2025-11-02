@@ -1,0 +1,16 @@
+---
+- name: Ensure nvim config dir exists
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.config/nvim"
+    state: directory
+    mode: '0755'
+
+- name: Install base nvim init.lua
+  ansible.builtin.copy:
+    dest: "{{ lookup('env', 'HOME') }}/.config/nvim/init.lua"
+    content: |
+      -- minimal init that bootstraps lazy and splits config
+      require('config.options')
+      require('config.keymaps')
+      require('config.lazy')
+    mode: '0644'

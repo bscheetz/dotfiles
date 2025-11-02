@@ -1,0 +1,10 @@
+---
+- name: Configure local workstation
+  hosts: local
+  become: true
+  vars:
+    dotfiles_dir: "{{ lookup('env', 'HOME') }}/dotfiles"
+  roles:
+    - role: common
+    - role: shell
+    - role: nvim

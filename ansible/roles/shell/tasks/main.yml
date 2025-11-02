@@ -1,0 +1,18 @@
+---
+- name: Deploy zsh config
+  ansible.builtin.copy:
+    dest: "{{ lookup('env', 'HOME') }}/.zshrc"
+    content: |
+      source ~/dotfiles/zsh/path.zsh
+      source ~/dotfiles/zsh/aliases.zsh
+      source ~/dotfiles/zsh/plugins.zsh
+      if [ -f ~/dotfiles/zsh/local.zsh ]; then
+        source ~/dotfiles/zsh/local.zsh
+      fi
+    mode: '0644'
+
+- name: Ensure local zsh dir exists
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/dotfiles/zsh"
+    state: directory
+    mode: '0755'
