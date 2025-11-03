@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_DIR="${HOME}/dotfiles"
+REPO_DIR="${REPO_DIR:-$(pwd)}/"
 
 if ! command -v ansible >/dev/null 2>&1; then
   if command -v brew >/dev/null 2>&1; then
