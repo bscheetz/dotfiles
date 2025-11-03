@@ -1,0 +1,8 @@
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias gs='git status'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+alias v='nvim'

@@ -1,0 +1,12 @@
+---
+- name: Ensure base packages are present (apt/brew best-effort)
+  ansible.builtin.package:
+    name: [git, curl, wget]
+    state: present
+  ignore_errors: true
+
+- name: Create stowable dirs
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.config"
+    state: directory
+    mode: '0755'

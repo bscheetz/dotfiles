@@ -1,0 +1,13 @@
+---
+- name: Ensure nvim config dir exists
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.config/nvim"
+    state: directory
+    mode: '0755'
+
+- name: Sync repo nvim/ into ~/.config/nvim
+  ansible.builtin.copy:
+    src: "{{ dotfiles_dir }}/nvim/"
+    dest: "{{ lookup('env','HOME') }}/.config/nvim/"
+    mode: "0644"
+    directory_mode: "0755"

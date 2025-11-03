@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Run setup.sh
           command: |
-            docker run dotfiles bash -c './setup.sh'
+            docker run dotfiles bash -c './bootstrap.sh'
 
 workflows:
   version: 2
