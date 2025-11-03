@@ -1,5 +1,11 @@
 ---
-- name: Deploy zsh config
+- name: Ensure zsh dir exists
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/dotfiles/zsh"
+    state: directory
+    mode: '0755'
+
+- name: Deploy modular .zshrc
   ansible.builtin.copy:
     dest: "{{ lookup('env', 'HOME') }}/.zshrc"
     content: |
@@ -11,8 +17,10 @@
       fi
     mode: '0644'
 
-- name: Ensure local zsh dir exists
-  ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/dotfiles/zsh"
-    state: directory
-    mode: '0755'
+- name: Deploy tmux.conf
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'HOME') }}/dotfiles/.tmux.conf"
+    dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+    mode: '0644'
+    remote_src: true
+

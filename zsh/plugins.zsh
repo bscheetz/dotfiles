@@ -1,17 +1,23 @@
-# Load zsh plugins
+# ~/dotfiles/zsh/plugins.zsh
+# use antigen to manage plugins
 
-# Example: zsh-autosuggestions
-if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# install antigen if missing
+if [ ! -f "$HOME/.antigen.zsh" ]; then
+  curl -L git.io/antigen > "$HOME/.antigen.zsh"
 fi
 
-# Example: zsh-syntax-highlighting
-if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+source "$HOME/.antigen.zsh"
 
-# Completion system
-autoload -Uz compinit && compinit
+antigen use oh-my-zsh
 
-# Keybindings
-bindkey -v
+# your typical stack
+antigen bundle git
+antigen bundle docker
+antigen bundle docker-compose
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# you can add your ~/.antigenrc later if you want to keep it separate
+
+antigen theme robbyrussell
+antigen apply
