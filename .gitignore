@@ -1,6 +1,21 @@
-.tags
+# editors
 .tags*
-tags
-tags.*
+tags*
+*.swp
+*.swo
 
+# neovim
+nvim/.netrwhist
 nvim/plugin
+nvim/undo
+nvim/.cache
+
+# zsh
+zsh/local.zsh
+
+# ansible
+*.retry
+
+# mac
+.DS_Store
+
