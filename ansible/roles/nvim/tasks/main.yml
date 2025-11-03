@@ -5,12 +5,9 @@
     state: directory
     mode: '0755'
 
-- name: Install base nvim init.lua
+- name: Sync repo nvim/ into ~/.config/nvim
   ansible.builtin.copy:
-    dest: "{{ lookup('env', 'HOME') }}/.config/nvim/init.lua"
-    content: |
-      -- minimal init that bootstraps lazy and splits config
-      require('config.options')
-      require('config.keymaps')
-      require('config.lazy')
-    mode: '0644'
+    src: "{{ dotfiles_dir }}/nvim/"
+    dest: "{{ lookup('env','HOME') }}/.config/nvim/"
+    mode: "0644"
+    directory_mode: "0755"
