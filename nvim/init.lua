@@ -1,5 +1,4 @@
 vim.g.loaded_python_provider = 0
-vim.g.python3_host_prog = os.getenv("PYENV_ROOT") .. "/versions/neovim3/bin/python3"
 vim.env.PATH = table.concat({
     vim.env.PATH,
     vim.fn.stdpath("data") .. "/mason/bin",
