@@ -5,6 +5,29 @@
     state: present
   ignore_errors: true
 
+- name: Ensure uv is installed
+  ansible.builtin.shell: | 
+    set -euo pipefail
+    if ! command -v uv >/dev/null 2>&1; then
+      curl -LsSf https://astral.sh/uv/install.sh | sh
+    fi
+  args:
+    executable: /bin/bash
+  changed_when: false
+  tags: ['python', 'uv']
+
+- name: Install pynvim via uv
+  ansible.builtin.shell: |
+    set -euo pipefail
+    # make sure uv is on PATH
+    export PATH="$HOME/.local/bin:$PATH"
+    if ! uv tool list | grep -q '^pynvim '; then
+      uv tool install pynvim
+    fi
+  args:
+    executable: /bin/bash
+  changed_when: false
+
 - name: Create stowable dirs
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/.config"
