@@ -11,3 +11,5 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH=$PATH:/home/ben/.cargo/bin
 # Add npm global to path
 export PATH=~/.npm-global/bin:$PATH
+# add uv to PATH
+export PATH="$HOME/.local/bin:$PATH"
