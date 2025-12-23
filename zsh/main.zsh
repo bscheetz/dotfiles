@@ -4,8 +4,10 @@ colors
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 precmd() { print "" }
-PS1="⟩"
-RPS1="%{$fg[magenta]%}%20<...<%~%<<%{$reset_color%}"
+PS1="%{$fg[green]%}⟩%{$reset_color%}"
+prompt_right="%{$fg[green]%}%20<...<%~%<<%{$reset_color%}$(git_prompt_info)"
+RPS1="$prompt_right"
+RPROMPT="$prompt_right"
 
 execute_tmux () {
       # autostart tmux if it exists
