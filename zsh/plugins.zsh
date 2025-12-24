@@ -8,7 +8,16 @@ fi
 
 source "$HOME/.antigen.zsh"
 
-# source antigen configuration from .antigenrc
-if [ -f "$HOME/dotfiles/.antigenrc" ]; then
-  source "$HOME/dotfiles/.antigenrc"
-fi
+antigen use oh-my-zsh
+
+# bundles
+antigen bundle git
+antigen bundle docker
+antigen bundle docker-compose
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# theme
+antigen theme refined
+
+antigen apply
