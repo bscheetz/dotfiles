@@ -8,6 +8,9 @@ fi
 
 source "$HOME/.antigen.zsh"
 
+# set theme BEFORE loading oh-my-zsh
+export ZSH_THEME="refined"
+
 antigen use oh-my-zsh
 
 # bundles
@@ -16,8 +19,5 @@ antigen bundle docker
 antigen bundle docker-compose
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-
-# theme
-antigen theme refined
 
 antigen apply
