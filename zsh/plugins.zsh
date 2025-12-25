@@ -8,8 +8,8 @@ fi
 
 source "$HOME/.antigen.zsh"
 
-# set theme BEFORE loading oh-my-zsh
-export ZSH_THEME="refined"
+# Don't set ZSH_THEME when using custom theme
+# export ZSH_THEME="af-magic"
 
 antigen use oh-my-zsh
 
@@ -21,3 +21,6 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen apply
+
+# Load custom theme after antigen setup
+source ~/dotfiles/zsh/custom-theme.zsh
