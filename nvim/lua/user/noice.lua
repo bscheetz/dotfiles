@@ -6,9 +6,15 @@ require("noice").setup({
       ["cmp.entry.get_documentation"] = true,
     },
   },
+  cmdline = {
+    enabled = true,
+  },
+  messages = {
+    enabled = true,
+  },
   presets = {
     bottom_search = true,
-    command_palette = false,
+    command_palette = true,
     long_message_to_split = true,
   },
 })
