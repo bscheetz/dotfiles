@@ -4,7 +4,7 @@ colors
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 precmd() { print "" }
-PS1="⟩"
+PS1="%{$fg[cyan]%}⟩%{$reset_color%}"
 RPS1="%{$fg[magenta]%}%20<...<%~%<<%{$reset_color%}"
 
 execute_tmux () {
