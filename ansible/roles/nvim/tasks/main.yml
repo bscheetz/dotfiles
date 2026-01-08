@@ -11,3 +11,8 @@
     dest: "{{ lookup('env','HOME') }}/.config/nvim/"
     mode: "0644"
     directory_mode: "0755"
+
+- name: Clear nvim shada file to fix noice startup prompt
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/nvim/shada/main.shada"
+    state: absent

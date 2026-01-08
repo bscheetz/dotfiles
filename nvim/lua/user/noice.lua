@@ -1,3 +1,14 @@
+-- Dismiss any pending noice messages on startup to prevent command prompt
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.schedule(function()
+      pcall(function()
+        require("noice").cmd("dismiss")
+      end)
+    end)
+  end,
+})
+
 require("noice").setup({
     lsp = {
     override = {
