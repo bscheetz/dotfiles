@@ -12,25 +12,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
-    "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
     "akinsho/bufferline.nvim",
     "windwp/nvim-autopairs",
-    "lewis6991/impatient.nvim",
-
     "nvim-lualine/lualine.nvim",
 
     -- cmp plugins
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lsp",
-
-    -- snippets
-    "L3MON4D3/LuaSnip",
-    "rafamadriz/friendly-snippets",
 
     -- LSP
     "neovim/nvim-lspconfig",
@@ -41,16 +32,8 @@ return require("lazy").setup({
         end,
     },
     "williamboman/mason-lspconfig.nvim",
-    "tamago324/nlsp-settings.nvim",
     "nvimtools/none-ls.nvim",
     "nvimtools/none-ls-extras.nvim",
-    {
-        "folke/noice.nvim",
-        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-        config = function()
-            require("user.noice")
-        end,
-    },
     -- NvimTree
     "kyazdani42/nvim-web-devicons",
     "kyazdani42/nvim-tree.lua",

@@ -10,28 +10,26 @@ if not mason_lsp_status then
     return
 end
 
-local lspconfig = require("lspconfig")
-
-local servers = { "lua_ls", "pyright", "svelte" } --"vtsls", "jsonls"
+local servers = { "lua_ls", "pyright", "svelte" }
 
 mason_lspconfig.setup({
     ensure_installed = servers,
     automatic_installation = false,
-    automatic_enable = false,
 })
 
-local handler_opts = {
-    on_attach = require("user.lsp.handlers").on_attach,
-    capabilities = require("user.lsp.handlers").capabilities,
+local handlers = require("user.lsp.handlers")
+
+-- Configure LSP servers using vim.lsp.config
+vim.lsp.config["*"] = {
+    on_attach = handlers.on_attach,
+    capabilities = handlers.capabilities,
 }
 
 for _, server in ipairs(servers) do
-    local opts = vim.tbl_deep_extend("force", {}, handler_opts)
-
-    local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings" .. server)
+    local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings." .. server)
     if has_custom_opts then
-        opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
+        vim.lsp.config[server] = server_custom_opts
     end
-
-    lspconfig[server].setup(opts)
 end
+
+vim.lsp.enable(servers)
