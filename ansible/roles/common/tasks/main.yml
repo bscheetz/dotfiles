@@ -4,6 +4,7 @@
     name: [git, curl, wget]
     state: present
   ignore_errors: true
+  become: true
 
 - name: Ensure uv is installed
   ansible.builtin.shell: |
