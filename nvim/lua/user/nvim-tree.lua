@@ -23,9 +23,7 @@ end
 require("nvim-tree").setup({
     disable_netrw = true,
     hijack_netrw = true,
-    open_on_tab = false,
     hijack_cursor = false,
-    update_cwd = true,
     diagnostics = {
         enable = true,
         icons = {
@@ -37,7 +35,7 @@ require("nvim-tree").setup({
     },
     update_focused_file = {
         enable = true,
-        update_cwd = true,
+        update_root = true,
         ignore_list = {},
     },
     system_open = {

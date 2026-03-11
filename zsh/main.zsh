@@ -54,8 +54,8 @@ set_up_nvm () {
 }
 
 set_up_autocomplete () {
-    source <(kubectl completion zsh)
-    source <(docker completion zsh)
+    command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)
+    command -v docker >/dev/null 2>&1 && source <(docker completion zsh)
 }
 
 # entering a directory automatically changes to that directory

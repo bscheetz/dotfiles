@@ -5,20 +5,12 @@
     state: directory
     mode: '0755'
 
-- name: Deploy modular .zshrc
-  ansible.builtin.copy:
+- name: Deploy .zshrc symlink
+  ansible.builtin.file:
+    src: "{{ lookup('env', 'HOME') }}/dotfiles/.zshrc"
     dest: "{{ lookup('env', 'HOME') }}/.zshrc"
-    content: |
-      source ~/dotfiles/zsh/path.zsh
-      source ~/dotfiles/zsh/aliases.zsh
-      source ~/dotfiles/zsh/plugins.zsh
-      if [ -f ~/dotfiles/zsh/main.zsh ]; then
-        source ~/dotfiles/zsh/main.zsh
-      fi
-      if [ -f ~/dotfiles/zsh/local.zsh ]; then
-        source ~/dotfiles/zsh/local.zsh
-      fi
-    mode: '0644'
+    state: link
+    force: true
 
 - name: Deploy tmux.conf
   ansible.builtin.copy:
