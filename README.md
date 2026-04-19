@@ -25,7 +25,10 @@ at `ansible/site.yml`, which symlinks `.zshrc`, `.tmux.conf`, and
 
 - `ansible/` — playbook and roles for setup
 - `nvim/` — neovim config (lua, lazy.nvim)
-- `zsh/` — zsh config fragments sourced by `.zshrc`
+- `zsh/` — zsh config fragments sourced by `.zshrc`; plugins declared
+  in `zsh/plugins.txt` and loaded via
+  [antidote](https://github.com/mattmc3/antidote) (cloned to
+  `~/.antidote` on first shell start)
 - `.tmux.conf` — tmux config (uses tpm for plugins)
 - `bootstrap.sh` — entrypoint; installs ansible and runs the playbook
 

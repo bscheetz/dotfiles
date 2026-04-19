@@ -1,24 +1,10 @@
 # ~/dotfiles/zsh/plugins.zsh
-# use antigen to manage plugins
+# plugin loading via antidote (https://github.com/mattmc3/antidote)
 
-# install antigen if missing
-if [ ! -f "$HOME/.antigen.zsh" ]; then
-  curl -fsSL https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh \
-    > "$HOME/.antigen.zsh"
+ANTIDOTE_DIR="${ANTIDOTE_HOME:-$HOME/.antidote}"
+if [ ! -d "$ANTIDOTE_DIR" ]; then
+  git clone --depth 1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR"
 fi
 
-source "$HOME/.antigen.zsh"
-
-antigen use oh-my-zsh
-
-# your typical stack
-antigen bundle git
-antigen bundle docker
-antigen bundle docker-compose
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# you can add your ~/.antigenrc later if you want to keep it separate
-
-antigen theme robbyrussell
-antigen apply
+source "$ANTIDOTE_DIR/antidote.zsh"
+antidote load "$HOME/dotfiles/zsh/plugins.txt"

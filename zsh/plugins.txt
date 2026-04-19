@@ -1,0 +1,12 @@
+# oh-my-zsh framework + plugins
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/docker-compose
+
+# syntax-highlighting must load before autosuggestions in newer zsh,
+# but autosuggestions docs say the opposite — either order works in
+# practice; follow antidote's convention: suggestions first, highlight last
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
