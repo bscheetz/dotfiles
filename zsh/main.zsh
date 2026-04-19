@@ -8,16 +8,23 @@ PS1="⟩"
 RPS1="%{$fg[magenta]%}%20<...<%~%<<%{$reset_color%}"
 
 execute_tmux () {
-      # autostart tmux if it exists
-      if [ "$TMUX" = "" ]
-            then
-            if tmux ls > /dev/null 2>&1
-                  then
-                  tmux a -t $(tmux ls | sort -n | head -1 | cut -d ":" -f1)
-            else
-                  # start tmux forcing 256 color and enable unicode characters
-                  tmux -2u
-            fi
+      # Only auto-launch tmux for interactive local terminals.
+      # Skip inside tmux, SSH, VS Code terminals, and non-interactive shells.
+      [[ $- == *i* ]] || return
+      [[ -n $TMUX ]] && return
+      [[ -n $SSH_TTY || -n $SSH_CONNECTION ]] && return
+      [[ -n $VSCODE_INJECTION ]] && return
+      command -v tmux >/dev/null 2>&1 || return
+
+      if tmux ls >/dev/null 2>&1; then
+            # attach to most recently used session
+            local last
+            last=$(tmux ls -F '#{session_last_attached} #{session_name}' \
+                  | sort -rn | head -1 | awk '{print $2}')
+            tmux attach -t "$last"
+      else
+            # start tmux forcing 256 color and enable unicode characters
+            tmux -2u
       fi
 }
 

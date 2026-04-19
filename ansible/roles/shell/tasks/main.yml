@@ -12,10 +12,10 @@
     state: link
     force: true
 
-- name: Deploy tmux.conf
-  ansible.builtin.copy:
+- name: Deploy .tmux.conf symlink
+  ansible.builtin.file:
     src: "{{ lookup('env', 'HOME') }}/dotfiles/.tmux.conf"
     dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
-    mode: '0644'
-    remote_src: true
+    state: link
+    force: true
 
