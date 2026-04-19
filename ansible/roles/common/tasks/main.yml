@@ -7,32 +7,28 @@
   become: true
 
 - name: Ensure uv is installed
-  ansible.builtin.shell: |
-    set -euo pipefail
-    if ! command -v uv >/dev/null 2>&1; then
+  ansible.builtin.shell:
+    cmd: |
+      set -euo pipefail
       curl -LsSf https://astral.sh/uv/install.sh | sh
-    fi
-  args:
     executable: /bin/bash
-  changed_when: false
+    creates: "{{ ansible_env.HOME }}/.local/bin/uv"
   become: false
   tags: ['python', 'uv']
 
 - name: Install pynvim via uv
-  ansible.builtin.shell: |
-    set -euo pipefail
-    # make sure uv is on PATH
-    export PATH="$HOME/.local/bin:$PATH"
-    if ! uv tool list | grep -q '^pynvim '; then
-      uv tool install pynvim
-    fi
-  args:
+  ansible.builtin.shell:
+    cmd: uv tool install pynvim
     executable: /bin/bash
-  changed_when: false
+  environment:
+    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.PATH }}"
+  register: pynvim_install
+  changed_when: "'Installed' in pynvim_install.stdout or 'installed' in pynvim_install.stdout"
   become: false
+  tags: ['python', 'pynvim']
 
 - name: Create stowable dirs
   ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/.config"
+    path: "{{ ansible_env.HOME }}/.config"
     state: directory
     mode: '0755'

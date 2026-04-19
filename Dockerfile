@@ -1,16 +1,22 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install sudo && \
-    adduser --gecos '' --home /home/user user && \
-    echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+    apt-get install -y --no-install-recommends \
+        sudo \
+        software-properties-common \
+        curl \
+        vim \
+        git \
+        zsh \
+        ansible \
+    && rm -rf /var/lib/apt/lists/* \
+    && adduser --gecos '' --home /home/user user \
+    && echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 USER user
-
 WORKDIR /home/user/dotfiles
+COPY --chown=user:user . /home/user/dotfiles
 
-RUN sudo apt-get -y install software-properties-common curl vim
-
-COPY . /home/user/dotfiles
-
-CMD /bin/bash
+CMD ["/bin/bash"]
