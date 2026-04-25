@@ -7,3 +7,4 @@
     - role: common
     - role: shell
     - role: nvim
+      tags: ['nvim']

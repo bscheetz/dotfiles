@@ -13,7 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
     "nvim-lua/plenary.nvim",
-    "akinsho/bufferline.nvim",
     "windwp/nvim-autopairs",
     "nvim-lualine/lualine.nvim",
 
@@ -45,7 +44,6 @@ return require("lazy").setup({
     -- Telescope
     "nvim-telescope/telescope.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    "HiPhish/rainbow-delimiters.nvim",
     "lewis6991/gitsigns.nvim",
     "christoomey/vim-tmux-navigator",
 }, {
